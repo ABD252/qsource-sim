@@ -1,0 +1,27 @@
+[build-system]
+requires = ["setuptools>=64"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "qsource-sim"
+version = "0.1.0"
+description = "How pump-laser imperfections degrade an SPDC entanglement source (JSA + Schmidt + Monte-Carlo mixed states)"
+readme = "README.md"
+license = { text = "MIT" }
+authors = [{ name = "Abdullah Al-Baqami" }]
+requires-python = ">=3.9"
+dependencies = [
+    "numpy>=1.24",
+    "scipy>=1.10",
+    "matplotlib>=3.7",
+    "pyyaml>=6.0",
+]
+
+[project.optional-dependencies]
+dashboard = ["streamlit>=1.30"]
+
+[project.scripts]
+qsource = "qsource.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]

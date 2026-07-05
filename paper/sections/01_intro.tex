@@ -1,0 +1,76 @@
+\section{Introduction}
+\label{sec:intro}
+
+Spontaneous parametric down-conversion (SPDC) remains the workhorse
+process for generating photon pairs and, by detection of one photon of
+a pair, heralded single photons; it underpinned the first two-photon
+interference experiments \cite{hong1987} and the bright
+polarization-entangled sources that followed \cite{kwiat1995}. For
+modern applications the heralded photon must also be spectrally pure.
+When the joint spectral amplitude (JSA) of the pair carries
+signal--idler frequency correlations, the heralding measurement leaves
+its partner in a mixed spectral state, and photons from independent
+sources become partially distinguishable, degrading quantum
+interference \cite{grice1997}. The Schmidt decomposition makes this
+quantitative: the heralded purity is the inverse of the Schmidt number
+of the JSA \cite{law2000}. Matching the group velocities of pump and
+down-converted fields can render the JSA approximately factorable at
+the source \cite{uren2005}, a strategy demonstrated experimentally with
+pure heralded photons produced without lossy spectral filtering
+\cite{mosley2008}.
+
+A mature source-engineering literature has since pushed intrinsic
+purity toward unity, most prominently by apodizing the nonlinear
+response through domain engineering of the crystal
+\cite{branczyk2011,graffitti2018}, and spectrally pure heralded sources
+are now a standard requirement in single-photon-source design
+\cite{meyerscott2020}. Joint-spectral characterization has also shown
+that the pump spectrum itself -- not only its nominal bandwidth -- can
+limit the purity a real source achieves \cite{zielnicki2018}.
+
+In nearly all of this work, however, the pump laser is idealized as a
+noiseless, transform-limited, single-longitudinal-mode Gaussian. Real
+pump lasers deviate from this ideal in ways that are already
+quantified, at no experimental cost, on the manufacturer's datasheet:
+center-frequency drift and jitter, relative intensity noise (RIN), and
+the longitudinal-mode structure of the laser cavity. What has been
+missing is a translation between those datasheet lines and the figure
+of merit a source builder cares about. How many gigahertz of pump
+jitter cost one percent of heralded purity? Does RIN matter at all?
+
+This paper provides that translation for a concrete, numerically
+transparent model. We study a collinear SPDC source described by
+first-order group-velocity-mismatch (GVM) phase matching, with
+parameters representative of a 10 mm PPKTP crystal pumped at 775 nm and
+emitting at 1550 nm, with a transform-limited Gaussian pump of 0.164
+THz bandwidth (standard deviation); the ideal heralded purity of this
+reference design is $P = 0.810$. Each
+pump imperfection is mapped to a Monte-Carlo ensemble of pure pump
+realizations, and the heralded photon is described by the
+ensemble-averaged density matrix, from which we compute the mixed-state
+purity directly. The results form a compact imperfection budget
+(Table~\ref{tab:budget}). Center jitter of 26, 61, and 88 GHz rms
+consumes a 1\%, 5\%, and 10\% relative purity budget, respectively;
+re-matching the pump to a 5 mm crystal roughly doubles these
+tolerances, at the cost of pair rate, which we do not model. Even a
+single additional longitudinal mode of equal power at 0.25 THz spacing
+costs 17\% of the purity -- more than the entire 10\% budget; the cost
+scales with the side mode's relative power, so a weak, well-suppressed
+side mode is far less damaging. RIN, by contrast,
+leaves the heralded spectral purity exactly invariant in this model but
+inflates accidental double-pair emission by the factor $1 + r^2$ for
+fractional intensity noise $r$. Datasheet lines therefore map onto two
+distinct damage channels: spectral imperfections that degrade purity,
+and statistical imperfections that degrade pair statistics.
+
+We emphasize the scope: this is a numerical modeling study with
+first-order (linear) GVM phase matching, quasi-static ensemble noise,
+and heralded spectral purity (together with the relative double-pair boost)
+as the figures of merit; absolute pair rate, heralding efficiency, and
+higher-order dispersion lie outside the model. Section~\ref{sec:model} defines the JSA, the
+Schmidt-decomposition purity, and the mixed-state ensemble method.
+Section~\ref{sec:results} establishes the ideal design baseline
+(pump-bandwidth and crystal-length optima) and presents the
+imperfection sweeps behind the budget. Section~\ref{sec:discussion}
+summarizes the budget, develops the spectral-versus-statistical reading
+of a laser datasheet, and discusses limitations and extensions.

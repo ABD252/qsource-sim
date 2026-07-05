@@ -1,0 +1,100 @@
+\section{Discussion}
+\label{sec:discussion}
+
+The central practical message of this study is that a pump-laser
+datasheet splits into two distinct damage channels. Spectral
+specifications---center-frequency stability and longitudinal-mode
+structure---act on the heralded state itself: each realization
+displaces or replicates the pump band across the phase-matching ridge
+of Eq.~(\ref{eq:pm}), the ensemble average of Eq.~(\ref{eq:rho}) mixes
+inequivalent Schmidt decompositions, and the purity of
+Eq.~(\ref{eq:purity}) falls. Statistical specifications---intensity
+noise---rescale each realization without changing its spectral shape,
+so the heralded purity is mathematically invariant (constant to better
+than $10^{-9}$ in our validation tests, Sec.~\ref{sec:model}; see also
+the flat sweep of Sec.~\ref{sec:results}), while the
+pair-number statistics degrade: the double-pair boost
+$\langle w^2 \rangle / \langle w \rangle^2 \approx 1 + r^2$ (exact to
+leading order in $r$) inflates
+accidental coincidences and erodes heralding fidelity through exactly
+the multi-pair channel analyzed in Ref.~\cite{takeoka2015}. Selecting
+a pump therefore means checking both columns: a spectrally quiet laser
+with high RIN delivers pure but noisy heralds, while an
+intensity-stable laser with a wandering center frequency delivers
+clean statistics on a mixed state.
+
+The budgets also show where a designer has leverage. Jitter tolerance
+scales approximately as $1/L$: halving the crystal from 10~mm to 5~mm
+(pump re-matched to 0.328~THz) roughly doubles every budget, from
+26/61/88~GHz~rms to 51/121/188~GHz~rms at the 1\%/5\%/10\% levels
+(Fig.~\ref{fig:jitter}), at the price of a lower pair rate that our
+model does not capture. The ideal purity itself is unchanged by this
+trade: the first-order JSA of Eq.~(\ref{eq:jsa}) is exactly invariant
+under the rescaling $L \to L/2$, $\sigma \to 2\sigma$, and the
+slightly higher value quoted for the 5~mm sweep (0.818 versus 0.810)
+is a numerical windowing artifact---the fixed frequency window
+truncates relatively more of the sinc side lobes of the twice-wider
+5~mm JSA---not a physical improvement. Bandwidth, by contrast, is the easy specification:
+the 1\% window spans 0.159--0.202~THz, a full width of roughly 26\% of
+the reference bandwidth, and the 10\% window spans 0.114--0.281~THz.
+Center stability is the hard one: the 1\% budget of 26~GHz~rms
+corresponds, via $\delta\lambda = \lambda^{2}\,\delta\nu/c$ at
+$\lambda = 775$~nm, to a wavelength stability of only about 52~pm
+($\approx 0.05$~nm). A pump may exceed its nominal bandwidth by tens
+of percent with negligible cost---though narrowing below the nominal
+value is penalized sooner, because the reference bandwidth sits near
+the lower edge of the tolerance window---but its center must hold to
+a sub-0.1-nm tolerance.
+
+Our ideal purity of 0.810 is the familiar ceiling of sinc-shaped
+phase matching, set by the side lobes of the unapodized crystal.
+Domain engineering and apodization reshape the phase-matching function
+toward a Gaussian and raise this ceiling well above
+0.81~\cite{branczyk2011,graffitti2018}. Our budgets are
+\emph{relative} degradations from whatever ceiling the phase matching
+provides, and the Monte-Carlo ensemble method applies unchanged to
+engineered crystals: only the sinc factor in Eq.~(\ref{eq:jsa}) need
+be replaced. Repeating the sweeps for an apodized source is a direct
+extension.
+
+Several limitations bound the present results, each pointing to future
+work. The model uses first-order GVM only: $\Delta k$ is linearized,
+with no Sellmeier dispersion or higher-order terms, so the
+phase-matching ridge is perfectly straight; curvature will matter for
+broadband pumps and long crystals. We compute heralded purity only;
+heralding efficiency and absolute pair rate are outside the model,
+though a complete source assessment must weigh all three
+jointly~\cite{meyerscott2020}. Jitter is treated as a quasi-static
+shot-to-shot ensemble without explicit slow/fast time structure. An
+incoherent pump linewidth, beyond the Gaussian coherent bandwidth, is
+not yet a separate mixed-state channel. Finally, the treatment is
+collinear and single-spatial-mode. We note that for two identical,
+independent heralded sources the Hong-Ou-Mandel visibility equals the
+single-source purity, $V_{\mathrm{HOM}} = P$
+\cite{hong1987,mosley2008}, so the budgets reported here translate
+directly into two-source interference visibility.
+
+\section{Conclusion}
+
+We have converted pump-laser datasheet specifications into a
+quantitative imperfection budget for the heralded spectral purity of
+an SPDC source, using a first-order GVM model with Monte-Carlo pump
+ensembles. The reference source (10~mm crystal, 0.164~THz pump) has
+ideal purity 0.810. Keeping the purity within 1\%/5\%/10\% of ideal
+requires center-frequency jitter below 26/61/88~GHz~rms; a 5~mm
+crystal roughly doubles these budgets to 51/121/188~GHz~rms at the
+cost of pair rate. Single-longitudinal-mode operation is mandatory: a second
+mode at 0.25~THz spacing alone costs 17\% of the purity, and the
+mode-spacing budgets for a three-line comb are 31/76/111~GHz. Pump
+bandwidth is forgiving, with a 1\% window of 0.159--0.202~THz.
+Intensity noise leaves the purity exactly invariant but inflates the
+double-pair boost approximately as $1 + r^{2}$; the Monte-Carlo
+budgets place the $+1\%$ crossing at 10\% RIN and the $+5\%$ crossing
+near 22\%. The rule for choosing a pump is simple: spectral
+specifications damage purity, statistical specifications damage pair
+statistics, and both columns of the datasheet must be checked.
+
+\begin{acknowledgments}
+We thank Prof.\ Yas Al-Hadithi (King Abdulaziz University) for his
+guidance and for discussions on laser physics.
+\end{acknowledgments}

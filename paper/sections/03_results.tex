@@ -1,0 +1,181 @@
+\section{Results}\label{sec:results}
+
+\subsection{Ideal-source baseline}
+
+We first establish the ideal-pump baseline that all imperfection budgets
+refer to. Figure~\ref{fig:design}(a) shows the heralded purity of
+Eq.~(\ref{eq:purity}) as a function of the pump bandwidth for the 10~mm
+reference crystal. The curve has the broad interior optimum expected
+when the pump-envelope and phase-matching correlations of
+Eq.~(\ref{eq:jsa}) are balanced \cite{grice1997,law2000,mosley2008}:
+the grid-limited peak is $P_{\max} = 0.8106$ at $0.178$~THz on the
+sweep's grid ($n = 512$, 6~THz frequency half-window), the top is
+flat, and the canonical reference point $\sigma = 0.164$~THz gives
+$P = 0.8100$ on the reference grid ($n = 256$, 4~THz half-window) used
+for all Monte-Carlo studies below. The 1\% tolerance
+window spans 0.159--0.202~THz, so the bandwidth itself is a forgiving
+design parameter. The fall-off is nearly log-symmetric about the
+optimum: equal factors from the peak give nearly equal purities
+(e.g.\ $P = 0.663$ and $0.665$ a factor of $1.9$ below and above it),
+and the endpoint values---$P = 0.41$ at $0.05$~THz against $0.24$ at
+$1.2$~THz---differ only because the sweep extends further on the
+broadband side (factors of $3.6$ and $6.7$ from the peak,
+respectively). The residual
+gap to $P = 1$ is the familiar penalty of an unapodized sinc
+phase-matching function \cite{branczyk2011,graffitti2018}.
+Figure~\ref{fig:design}(b) shows the complementary sweep: at fixed
+$\sigma = 0.164$~THz the crystal length has its optimum at 10--12~mm
+($P = 0.806$ at 10~mm, $0.805$ at 12~mm), falling to $0.286$ at 2~mm
+and $0.51$ at 30~mm. This is the same matching condition seen from the
+crystal side. The small offset between the $0.806$ quoted here and the
+$0.8100$ reference value above is a frequency-window truncation effect,
+not discretization: the slowly decaying sinc side lobes make the
+computed purity drift with the window half-width ($P = 0.8100$,
+$0.8074$, and $0.8061$ at the same operating point for the 4, 6, and
+8~THz half-windows of the reference grid, the bandwidth sweep, and the
+length sweep, respectively), so ideal purities are comparable only
+within a fixed window and are window-independent only at the level
+$P \approx 0.81$. As a narrowband anchor, a 5~GHz pump yields
+$P \approx 0.045$ and $K \approx 22$ (Eq.~(\ref{eq:schmidt})) once the
+grid resolves the few-GHz pump ridge (which is narrower than the pixel
+of the sweep grids), recovering the strongly anti-correlated quasi-CW
+limit.
+
+\begin{figure*}[t]
+\includegraphics[width=\linewidth]{fig2_design}
+\caption{Ideal-source design space. (a) Heralded purity versus pump
+bandwidth (log axis) for the 10~mm crystal; the dotted line marks the
+grid-limited peak $P_{\max} = 0.8106$ at $0.178$~THz on a flat-topped
+optimum. (b) Purity versus crystal length (2--30~mm) at the fixed
+reference pump bandwidth of $0.164$~THz, with the optimum at
+10--12~mm.}
+\label{fig:design}
+\end{figure*}
+
+\subsection{Spectral drift and jitter}
+
+Figure~\ref{fig:jitter} shows the heralded purity of the Monte-Carlo
+mixed state (Eq.~(\ref{eq:rho})) as the pump center frequency jitters
+with increasing rms amplitude. At zero jitter the ensemble reproduces
+the ideal value exactly, $P(0) = 0.8100$; the seed-averaged degradation
+is monotonic and reaches $P = 0.299$ at $0.5$~THz rms (individual seeds
+scatter non-monotonically about this mean, with the worst seed reaching
+$0.287$). The shaded band is the spread
+of three independent seeds ($N = 120$ realizations each); at
+$0.25$~THz rms the three seeds give $P = 0.484/0.460/0.513$, i.e.\ a
+spread of about $\pm 0.03$ that dominates the negligible discretization
+error ($\sim 2\times 10^{-5}$ under grid refinement at fixed window).
+The seed-averaged budgets for the 10~mm
+crystal are 26/61/88~GHz rms for a 1/5/10\% relative purity drop.
+Re-matching the source with a 5~mm crystal and a $0.328$~THz pump
+(ideal $P = 0.8183$) roughly doubles every budget to 51/121/188~GHz
+(factors of 1.98--2.12; the 5~mm sweep uses a single seed): the
+phase-matching bandwidth scales as $1/L$
+(Eq.~(\ref{eq:pm})), so a shorter crystal simply presents a wider
+acceptance to a wandering pump, at the cost of a lower pair rate that
+our model does not capture.
+
+\begin{figure}[t]
+\includegraphics[width=\linewidth]{fig3_jitter}
+\caption{Heralded purity versus pump center jitter/drift (rms, treated
+as a quasi-static ensemble) for the 10~mm reference source (circles;
+shaded band: spread of three Monte-Carlo seeds) and for a 5~mm crystal
+with the pump re-matched to $0.328$~THz (squares). Dotted lines mark
+the respective ideal purities.}
+\label{fig:jitter}
+\end{figure}
+
+\subsection{Longitudinal-mode structure}
+
+Multimode pump operation is far less forgiving.
+Figure~\ref{fig:multimode}(a) shows the purity ladder for an
+equal-weight comb at $0.25$~THz spacing:
+$P = 0.810$, $0.670$, $0.535$, $0.451$, $0.370$, $0.321$, $0.297$ for
+1--7 lines. A single extra mode at this spacing already costs 17\% of
+the purity---more than the entire 10\% budget---so the maximum mode
+count within any budget is one. Figure~\ref{fig:multimode}(b) sweeps
+the spacing of a fixed 3-mode comb: at $0.02$~THz the lines are
+unresolved by the JSA and $P = 0.807$, essentially the single-mode
+value, while at $0.6$~THz the purity has fallen to $0.31$. The spacing
+budgets are 31/76/111~GHz for 1/5/10\%. The practical reading is that a
+nominally single-frequency pump that occasionally hops or lases on a
+side mode is a first-order threat to heralded purity, on par with the
+strongest jitter considered above.
+
+\begin{figure*}[t]
+\includegraphics[width=\linewidth]{fig4_multimode}
+\caption{Longitudinal-mode structure of the pump. (a) Heralded purity
+versus the number of comb lines at $0.25$~THz spacing; the dotted line
+is the single-mode value. (b) Purity versus the spacing of a 3-mode
+comb (0.02--0.6~THz); for spacings unresolved by the JSA the
+single-mode purity is recovered.}
+\label{fig:multimode}
+\end{figure*}
+
+\subsection{Intensity noise attacks a different metric}
+
+Relative intensity noise behaves qualitatively differently
+(Fig.~\ref{fig:rin}). Because a pulse-energy fluctuation rescales the
+ensemble weights $w_k$ in Eq.~(\ref{eq:rho}) without changing any
+normalized spectral amplitude, the heralded purity is exactly
+invariant: on the $n = 64$ grid used for this study it is flat at
+$0.809956$ for every RIN value from 0 to 30\% rms
+(Fig.~\ref{fig:rin}(a)). What RIN does damage is the pair statistics
+relevant for heralding fidelity and accidental double pairs
+\cite{takeoka2015,meyerscott2020}: the double-pair boost
+$\langle w^2 \rangle / \langle w \rangle^2$ follows the small-$r$
+prediction $1 + r^2$, with a measured $1.0221$ at 15\% RIN against a
+theoretical $1.0225$, and $1.0865$ at 30\% against $1.09$
+(Fig.~\ref{fig:rin}(b)). The residual scatter about $1 + r^2$ is
+finite-sample Monte-Carlo error: the boost estimator has a standard
+error of $\approx 0.004$ at $r = 0.3$ for $N = 10^3$ realizations, and
+the measured points fall on both sides of the theory (e.g.\ $1.0560$
+against $1.0506$ at 22.5\% RIN), whereas the clipping of the weights
+$w = \max[0,\, 1 + \mathcal{N}(0, r^2)]$ at zero is negligible here,
+shifting the boost by only $-8\times 10^{-5}$ at $r = 0.30$. Budgeted
+on the boost, a $+1\%$ increase
+is reached at 10.0\% RIN and $+5\%$ at 21.7\%; $+10\%$ is not reached
+within the 30\% sweep. A datasheet must therefore be read with this
+split in mind: jitter and mode structure are spectral imperfections
+that degrade purity, while RIN is a statistical imperfection that
+leaves purity untouched and instead degrades the pair-number
+statistics.
+
+\begin{figure*}[t]
+\includegraphics[width=\linewidth]{fig5_rin}
+\caption{Relative intensity noise. (a) Heralded purity versus RIN
+(0--30\% rms): exactly invariant, flat at $0.809956$ on the $n = 64$
+grid. (b) Double-pair boost $\langle w^2 \rangle / \langle w \rangle^2$
+from the Monte-Carlo ensemble ($N = 10^3$) against the small-$r$ theory
+$1 + r^2$ (dashed); the dotted line marks the noiseless value of 1.}
+\label{fig:rin}
+\end{figure*}
+
+\subsection{The imperfection budget}
+
+Table~\ref{tab:budget} collects the results of
+Figs.~\ref{fig:design}--\ref{fig:rin} into a single auto-generated
+budget. The convention is as follows: each entry is the largest value
+of the imperfection for which the heralded purity stays within a
+1/5/10\% \emph{relative} drop of the ideal value of the same source
+(0.8100 for the 10~mm source, 0.8183 for the re-matched 5~mm source);
+the pump-bandwidth row is instead the window of bandwidths within the
+stated drop of the peak, and RIN---which leaves purity exactly
+invariant---is budgeted on the double-pair boost instead. The
+hierarchy is unambiguous: longitudinal-mode structure is the least
+tolerable imperfection, center jitter comes next with budgets in the
+tens of GHz, and RIN only matters at the ten-percent level and through
+a different observable.
+
+\begin{table*}[t]
+\centering
+\input{tables/budget}
+\caption{Imperfection budget, auto-generated from the sweeps of
+Sec.~\ref{sec:results}. Each entry is the largest imperfection keeping
+the heralded purity within the stated relative drop of the ideal value
+of the same source; the bandwidth row gives the tolerance window
+around the purity peak, and RIN is budgeted on the double-pair boost
+$\langle w^2 \rangle / \langle w \rangle^2$ because the purity is
+exactly RIN-invariant.}
+\label{tab:budget}
+\end{table*}

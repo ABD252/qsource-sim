@@ -1,0 +1,8 @@
+# Purity vs pump bandwidth — the interior optimum (ideal pump).
+crystal: {length_mm: 10, kappa_s: 0.207e-9, kappa_i: -0.318e-9}
+pump: {bandwidth_thz: 0.164}
+grid: {n: 512, span_thz: 6, realizations: 120, seeds: [7]}
+sweep:
+  parameter: bandwidth_hz
+  values: [5.000000e+10, 5.861119e+10, 6.870544e+10, 8.053816e+10, 9.440875e+10, 1.106682e+11, 1.297279e+11, 1.520701e+11, 1.782602e+11, 2.089609e+11, 2.449490e+11, 2.871350e+11, 3.365865e+11, 3.945548e+11, 4.625065e+11, 5.421612e+11, 6.355343e+11, 7.449885e+11, 8.732933e+11, 1.023695e+12, 1.200000e+12]
+outputs: {figures: true, csv: true}

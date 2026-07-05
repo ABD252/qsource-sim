@@ -1,0 +1,18 @@
+# generated results (reproducible from configs/)
+results/
+
+# LaTeX intermediates (main.pdf is kept — the repo is self-contained)
+paper/main.log
+paper/main.blg
+paper/main.aux
+paper/main.bbl
+
+# python
+__pycache__/
+*.pyc
+src/*.egg-info/
+
+# macOS / tooling
+.DS_Store
+.claude/
+paper/.*.log

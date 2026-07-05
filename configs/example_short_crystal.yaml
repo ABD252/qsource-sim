@@ -1,0 +1,26 @@
+# Same jitter sweep as example.yaml but on a 5 mm crystal — for
+#   qsource compare configs/example.yaml configs/example_short_crystal.yaml
+# A shorter crystal has a wider phase-matching function, so it tolerates
+# more pump drift before purity collapses.
+
+crystal:
+  length_mm: 5
+  kappa_s: 0.207e-9
+  kappa_i: -0.318e-9
+
+pump:
+  bandwidth_thz: 0.328   # optimum scales ~1/L: re-matched for the 5 mm crystal
+
+grid:
+  n: 192
+  span_thz: 4
+  realizations: 40
+  seed: 7
+
+sweep:
+  parameter: center_jitter_hz
+  values: {start: 0, stop: 0.5e+12, points: 9}
+
+outputs:
+  figures: true
+  csv: true

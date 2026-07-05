@@ -1,0 +1,10 @@
+# Purity vs number of longitudinal modes (comb spacing 0.25 THz).
+crystal: {length_mm: 10, kappa_s: 0.207e-9, kappa_i: -0.318e-9}
+pump:
+  bandwidth_thz: 0.164
+  mode_spacing_hz: 0.25e+12
+grid: {n: 256, span_thz: 4, realizations: 120, seeds: [7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22]}
+sweep:
+  parameter: n_modes
+  values: [1, 2, 3, 4, 5, 6, 7]
+outputs: {figures: true, csv: true}

@@ -1,0 +1,36 @@
+% qsource-sim preprint — compile with:  tectonic main.tex  (from paper/)
+% Every number in this paper is reproducible:  qsource run configs/paper/<study>.yaml
+\documentclass[aps,pra,twocolumn,superscriptaddress,nofootinbib]{revtex4-2}
+
+\usepackage{graphicx}
+\usepackage{amsmath,amssymb}
+\usepackage{bm}
+\usepackage[colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue]{hyperref}
+
+\graphicspath{{figures/}}
+
+\begin{document}
+
+\title{An imperfection budget for pump lasers in spectrally pure
+photon-pair sources based on spontaneous parametric down-conversion}
+
+\author{Abdullah Al-Baqami}
+\affiliation{Department of Physics, Faculty of Science,
+King Abdulaziz University, Jeddah, Saudi Arabia}
+
+\date{\today}
+
+\begin{abstract}
+\input{sections/00_abstract}
+\end{abstract}
+
+\maketitle
+
+\input{sections/01_intro}
+\input{sections/02_model}
+\input{sections/03_results}
+\input{sections/04_discussion}
+
+\bibliography{refs}
+
+\end{document}

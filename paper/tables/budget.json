@@ -1,0 +1,347 @@
+{
+  "jitter_10mm": {
+    "ideal_purity": 0.810024,
+    "cells": [
+      {
+        "drop": "1%",
+        "source": "jitter_fine",
+        "n_seeds": 16,
+        "mean_ghz": 27.691121973634395,
+        "sem_ghz": 0.29374340486381134,
+        "n_finite": 16,
+        "criteria": {
+          "all_crossed": true,
+          "away_from_zero": true,
+          "drop_resolved_2sigma": true
+        },
+        "quote": "27.7 +- 0.3"
+      },
+      {
+        "drop": "5%",
+        "source": "jitter",
+        "n_seeds": 16,
+        "mean_ghz": 62.676787530907426,
+        "sem_ghz": 0.7336687023930322,
+        "n_finite": 16,
+        "criteria": {
+          "all_crossed": true,
+          "away_from_zero": true,
+          "drop_resolved_2sigma": true
+        },
+        "quote": "62.7 +- 0.7"
+      },
+      {
+        "drop": "10%",
+        "source": "jitter",
+        "n_seeds": 16,
+        "mean_ghz": 90.54062532673493,
+        "sem_ghz": 1.2770593125022054,
+        "n_finite": 16,
+        "criteria": {
+          "all_crossed": true,
+          "away_from_zero": true,
+          "drop_resolved_2sigma": true
+        },
+        "quote": "91 +- 1"
+      }
+    ]
+  },
+  "jitter_5mm": {
+    "ideal_purity": 0.818329,
+    "cells": [
+      {
+        "drop": "1%",
+        "source": "jitter_L5",
+        "n_seeds": 16,
+        "mean_ghz": 54.10885255490753,
+        "sem_ghz": 0.9130075052654808,
+        "n_finite": 16,
+        "criteria": {
+          "all_crossed": true,
+          "away_from_zero": true,
+          "drop_resolved_2sigma": true
+        },
+        "quote": "54.1 +- 0.9"
+      },
+      {
+        "drop": "5%",
+        "source": "jitter_L5",
+        "n_seeds": 16,
+        "mean_ghz": 125.42873825761266,
+        "sem_ghz": 1.4759013054051304,
+        "n_finite": 16,
+        "criteria": {
+          "all_crossed": true,
+          "away_from_zero": true,
+          "drop_resolved_2sigma": true
+        },
+        "quote": "125 +- 1"
+      },
+      {
+        "drop": "10%",
+        "source": "jitter_L5",
+        "n_seeds": 16,
+        "mean_ghz": 181.1422685795741,
+        "sem_ghz": 2.5554484845703906,
+        "n_finite": 16,
+        "criteria": {
+          "all_crossed": true,
+          "away_from_zero": true,
+          "drop_resolved_2sigma": true
+        },
+        "quote": "181 +- 3"
+      }
+    ]
+  },
+  "jitter_20mm": {
+    "ideal_purity": 0.806079,
+    "cells": [
+      {
+        "drop": "1%",
+        "source": "jitter_L20",
+        "n_seeds": 16,
+        "mean_ghz": 13.519981035546992,
+        "sem_ghz": 0.22847697587352397,
+        "n_finite": 16,
+        "criteria": {
+          "all_crossed": true,
+          "away_from_zero": true,
+          "drop_resolved_2sigma": true
+        },
+        "quote": "13.5 +- 0.2"
+      },
+      {
+        "drop": "5%",
+        "source": "jitter_L20",
+        "n_seeds": 16,
+        "mean_ghz": 31.332213302610505,
+        "sem_ghz": 0.3660068919444556,
+        "n_finite": 16,
+        "criteria": {
+          "all_crossed": true,
+          "away_from_zero": true,
+          "drop_resolved_2sigma": true
+        },
+        "quote": "31.3 +- 0.4"
+      },
+      {
+        "drop": "10%",
+        "source": "jitter_L20",
+        "n_seeds": 16,
+        "mean_ghz": 45.26488942245627,
+        "sem_ghz": 0.6384211845568092,
+        "n_finite": 16,
+        "criteria": {
+          "all_crossed": true,
+          "away_from_zero": true,
+          "drop_resolved_2sigma": true
+        },
+        "quote": "45.3 +- 0.6"
+      }
+    ]
+  },
+  "jitter_gauss": {
+    "ideal_purity": 0.981752,
+    "cells": [
+      {
+        "drop": "1%",
+        "source": "jitter_gauss",
+        "n_seeds": 16,
+        "mean_ghz": 30.04664867761487,
+        "sem_ghz": 0.3359901574473419,
+        "n_finite": 16,
+        "criteria": {
+          "all_crossed": true,
+          "away_from_zero": true,
+          "drop_resolved_2sigma": true
+        },
+        "quote": "30 +- 0.3"
+      },
+      {
+        "drop": "5%",
+        "source": "jitter_gauss",
+        "n_seeds": 16,
+        "mean_ghz": 68.51959858120468,
+        "sem_ghz": 0.7675335155160012,
+        "n_finite": 16,
+        "criteria": {
+          "all_crossed": true,
+          "away_from_zero": true,
+          "drop_resolved_2sigma": true
+        },
+        "quote": "68.5 +- 0.8"
+      },
+      {
+        "drop": "10%",
+        "source": "jitter_gauss",
+        "n_seeds": 16,
+        "mean_ghz": 102.34198582991205,
+        "sem_ghz": 1.1055623982339065,
+        "n_finite": 16,
+        "criteria": {
+          "all_crossed": true,
+          "away_from_zero": true,
+          "drop_resolved_2sigma": true
+        },
+        "quote": "102 +- 1"
+      }
+    ]
+  },
+  "spacing_3modes": {
+    "cells": [
+      {
+        "drop": "1%",
+        "source": "spacing",
+        "n_seeds": 16,
+        "mean_ghz": 29.55047714453346,
+        "sem_ghz": 0.14253875959044926,
+        "n_finite": 16,
+        "criteria": {
+          "all_crossed": true,
+          "away_from_zero": true,
+          "drop_resolved_2sigma": true
+        },
+        "quote": "29.6 +- 0.1"
+      },
+      {
+        "drop": "5%",
+        "source": "spacing",
+        "n_seeds": 16,
+        "mean_ghz": 75.94275341182843,
+        "sem_ghz": 0.5436392365898375,
+        "n_finite": 16,
+        "criteria": {
+          "all_crossed": true,
+          "away_from_zero": true,
+          "drop_resolved_2sigma": true
+        },
+        "quote": "75.9 +- 0.5"
+      },
+      {
+        "drop": "10%",
+        "source": "spacing",
+        "n_seeds": 16,
+        "mean_ghz": 112.14724769525982,
+        "sem_ghz": 0.7388385947690048,
+        "n_finite": 16,
+        "criteria": {
+          "all_crossed": true,
+          "away_from_zero": true,
+          "drop_resolved_2sigma": true
+        },
+        "quote": "112.1 +- 0.7"
+      }
+    ]
+  },
+  "side_modes_0.25THz": {
+    "cells": [
+      {
+        "drop": "1%",
+        "quote": "0",
+        "side_modes": 0,
+        "seeds_agree": true
+      },
+      {
+        "drop": "5%",
+        "quote": "0",
+        "side_modes": 0,
+        "seeds_agree": true
+      },
+      {
+        "drop": "10%",
+        "quote": "0",
+        "side_modes": 0,
+        "seeds_agree": true
+      }
+    ]
+  },
+  "bandwidth_band": {
+    "peak_purity": 0.810568,
+    "peak_thz": 0.17826,
+    "cells": [
+      {
+        "drop": "1%",
+        "band_thz": [
+          0.15913153007749134,
+          0.20170568321839102
+        ],
+        "quote": "0.159--0.202"
+      },
+      {
+        "drop": "5%",
+        "band_thz": [
+          0.13096949307489889,
+          0.2438553156748347
+        ],
+        "quote": "0.131--0.244"
+      },
+      {
+        "drop": "10%",
+        "band_thz": [
+          0.11405800618775165,
+          0.2806296915080433
+        ],
+        "quote": "0.114--0.281"
+      }
+    ]
+  },
+  "rin_boost": {
+    "cells": [
+      {
+        "quote": "9.93 +- 0.08",
+        "mean_pct": 9.931730721627915,
+        "sem_pct": 0.08172436278258832,
+        "n_finite": 8,
+        "n_seeds": 8,
+        "rise": "+1%"
+      },
+      {
+        "quote": "22.3 +- 0.2",
+        "mean_pct": 22.26498434670908,
+        "sem_pct": 0.19176882856009875,
+        "n_finite": 8,
+        "n_seeds": 8,
+        "rise": "+5%"
+      },
+      {
+        "quote": "beyond sweep",
+        "mean_pct": null,
+        "sem_pct": null,
+        "rise": "+10%"
+      }
+    ]
+  },
+  "scaling_1_over_L": {
+    "inv_L_per_m": [
+      50.0,
+      100.0,
+      200.0
+    ],
+    "budgets_ghz": {
+      "1%": {
+        "points": [
+          13.519981035546992,
+          27.691121973634395,
+          54.10885255490753
+        ],
+        "fit_slope_ghz_m": 0.27175012876423416
+      },
+      "5%": {
+        "points": [
+          31.332213302610505,
+          62.676787530907426,
+          125.42873825761266
+        ],
+        "fit_slope_ghz_m": 0.6270483251379771
+      },
+      "10%": {
+        "points": [
+          45.26488942245627,
+          90.54062532673493,
+          181.1422685795741
+        ],
+        "fit_slope_ghz_m": 0.9056335375183072
+      }
+    }
+  }
+}

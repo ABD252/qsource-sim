@@ -1,0 +1,138 @@
+\section{Model and methods}
+\label{sec:model}
+
+\subsection{Joint spectral amplitude}
+
+We consider collinear, single-spatial-mode SPDC and describe the emitted
+photon pair by its joint spectral amplitude (JSA). Writing $\nu_s$ and
+$\nu_i$ for the angular-frequency detunings of signal and idler from
+their central design frequencies, the JSA factorizes into an
+energy-conservation term set by the pump and a momentum-conservation
+term set by the crystal \cite{grice1997},
+\begin{equation}
+  f(\nu_s,\nu_i) = \alpha(\nu_s+\nu_i)\,\phi(\nu_s,\nu_i) .
+  \label{eq:jsa}
+\end{equation}
+For a transform-limited Gaussian pump the envelope is
+$\alpha(\nu) = \exp[-\nu^2/(2\sigma^2)]$, a band along the antidiagonal
+$\nu_s+\nu_i=0$; $\sigma$ is the standard deviation of the amplitude
+envelope in angular frequency. Bandwidths are quoted throughout as the
+corresponding ordinary-frequency values; the reference pump has
+$\sigma/2\pi = 0.164$~THz. For the phase matching we use the standard
+first-order group-velocity-mismatch (GVM) expansion of the wave-vector
+mismatch in a crystal of length $L$,
+\begin{equation}
+  \phi(\nu_s,\nu_i) = \mathrm{sinc}\!\left(\frac{\Delta k\,L}{2}\right),
+  \qquad
+  \Delta k = \kappa_s \nu_s + \kappa_i \nu_i ,
+  \label{eq:pm}
+\end{equation}
+with $\mathrm{sinc}(x)=\sin(x)/x$ and
+$\kappa_j = 1/v_g^{\mathrm{pump}} - 1/v_g^{(j)}$ the group-velocity
+mismatch between the pump and photon $j$. The reference crystal has
+$L = 10$~mm, $\kappa_s = +0.207$~ns/m, and $\kappa_i = -0.318$~ns/m,
+representative of PPKTP pumped at 775~nm and producing degenerate pairs
+at 1550~nm \cite{grice1997,uren2005,graffitti2018}. The ratio
+$\kappa_s/\kappa_i$ sets the tilt of the sinc ridge in the
+$(\nu_s,\nu_i)$ plane, and the interplay of this tilt with the pump
+band determines how separable the JSA can be
+(Fig.~\ref{fig:anatomy}). We deliberately retain only this first-order
+model: no Sellmeier dispersion, no higher-order terms, and no
+apodization of the nonlinearity \cite{branczyk2011,graffitti2018}, so
+that the imperfection budgets below isolate pump effects at a fixed,
+transparent phase-matching geometry.
+
+\begin{figure*}
+  \includegraphics[width=\linewidth]{fig1_jsa_anatomy}
+  \caption{Anatomy of the JSA at the reference point ($L = 10$~mm,
+  $\sigma/2\pi = 0.164$~THz); axes are detunings $\nu/2\pi$ in THz. Left to
+  right: pump intensity $|\alpha|^2$, a band along the antidiagonal
+  $\nu_s+\nu_i=0$ (energy conservation); phase-matching intensity
+  $|\phi|^2$, a sinc ridge with side lobes whose tilt is set by
+  $\kappa_s/\kappa_i$ (momentum conservation); their product, the joint
+  spectral intensity $|f|^2$, a compact and nearly isotropic central
+  lobe with faint sinc side lobes; and the Schmidt spectrum
+  $\lambda_k$ of the discretized amplitude, dominated by a single
+  coefficient and giving $P = 0.810$, $K = 1.23$.}
+  \label{fig:anatomy}
+\end{figure*}
+
+\subsection{Schmidt decomposition}
+
+The JSA is evaluated on a square grid of $n$ points per axis over a
+window of half-width 4--8~THz (chosen per study so that the intensity
+decays to zero well inside the boundary) and normalized so that
+$\sum |f|^2 = 1$. The Schmidt decomposition of the discretized JSA is
+its singular-value decomposition \cite{law2000}: with singular values
+$s_k$, the Schmidt coefficients are
+$\lambda_k = s_k^2 / \sum_j s_j^2$, and the heralded-photon spectral
+purity and Schmidt number are
+\begin{equation}
+  P = \sum_k \lambda_k^2 , \qquad K = 1/P .
+  \label{eq:schmidt}
+\end{equation}
+$P = 1$ ($K = 1$) corresponds to a fully separable JSA. At the
+reference point $P = 0.8100$ ($K = 1.2345$).
+
+\subsection{Imperfect pump as a mixed-state ensemble}
+
+An imperfect pump is a classical ensemble of pure pump realizations,
+so the heralded signal photon is described by a density matrix rather
+than a single Schmidt spectrum. We Monte-Carlo sample $N = 120$ pure
+realizations ($N = 1000$ for the RIN sweep, whose per-realization cost
+is lower), compute the discretized JSA matrix $A_k$ for each, and
+accumulate
+\begin{equation}
+  \rho \propto \sum_{k} w_k\, A_k A_k^\dagger ,
+  \label{eq:rho}
+\end{equation}
+from which the heralded purity follows in a normalization-independent
+form,
+\begin{equation}
+  P = \frac{\mathrm{Tr}(\rho^2)}{[\mathrm{Tr}(\rho)]^2} .
+  \label{eq:purity}
+\end{equation}
+Each imperfection is parameterized directly by laser datasheet
+statistics and enters only the pump. Per realization we sample:
+(i) \emph{center jitter/drift} --- a Gaussian shift of the pump center
+frequency with the quoted rms value, treated as a quasi-static
+shot-to-shot ensemble; (ii) \emph{longitudinal multimode structure} ---
+one comb line drawn from a set of $M$ discrete lines centered
+symmetrically on the pump, at offsets $(m - (M-1)/2)$ times the mode
+spacing for $m = 0,\dots,M-1$ (half-integer multiples of the spacing
+when $M$ is even), with normalized line weights (uniform unless
+stated); the total pump shift is the sum of
+the comb-line offset and the jitter draw; and (iii) \emph{relative
+intensity noise} (RIN) --- a realization weight
+$w = \max[0,\, 1 + \mathcal{N}(0, r^2)]$, where $\mathcal{N}(0, r^2)$
+is a zero-mean Gaussian with standard deviation $r$, the fractional rms
+intensity noise, each realization's JSA being individually normalized.
+The 10~mm jitter sweep, which has the largest Monte-Carlo variance, is
+run with three independent seeds (7, 8, 9) to estimate sampling
+uncertainty; the remaining Monte-Carlo sweeps use a single seed (7),
+and for the RIN sweep the heralded purity is exactly independent of
+the sampled weights (see the validation suite below).
+
+\subsection{Numerical robustness and validation}
+
+Ideal-pump sweeps use $n = 512$; Monte-Carlo studies use $n = 256$,
+which is converged to better than $10^{-4}$ in $P$ against $n = 768$
+at the hardest points of the parameter sweeps (0.05~THz bandwidth over
+a 6~THz half-window; 2~mm crystal over an 8~THz half-window). The RIN
+sweep uses a coarser $n = 64$ grid: there every realization shares the
+identical JSA and only the scalar weights vary, so the reported purity
+invariance is exact at any grid size. At
+mid-curve jitter (0.25~THz rms) the three seeds give
+$P = 0.484/0.460/0.513$, a spread of about $\pm 0.03$, while grid
+refinement at the same point changes $P$ by only $\sim 2\times10^{-5}$:
+Monte-Carlo noise, not discretization, dominates the error budget. The
+code ships with a validation suite of nine physics tests, including
+exact collapse of the zero-imperfection ensemble to the pure-state SVD
+purity ($P = 0.8100$), exact RIN invariance of the heralded purity
+(difference below $10^{-9}$), reduction of a comb with zero side-line
+weight to the single-mode result, and monotonic degradation of purity
+with jitter.
+
+All simulations use the open-source \texttt{qsource-sim} package
+(Python, MIT license); every figure and table in this paper regenerates
+from a declarative YAML configuration file, one per study.

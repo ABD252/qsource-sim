@@ -1,0 +1,9 @@
+# RIN sweep: heralded purity is exactly invariant; the double-pair
+# boost <w^2>/<w>^2 is the metric that degrades (statistical channel).
+crystal: {length_mm: 10, kappa_s: 0.207e-9, kappa_i: -0.318e-9}
+pump: {bandwidth_thz: 0.164}
+grid: {n: 64, span_thz: 4, realizations: 1000, seeds: [7, 8, 9, 10, 11, 12, 13, 14]}
+sweep:
+  parameter: rin_frac
+  values: {start: 0, stop: 0.30, points: 13}
+outputs: {figures: true, csv: true}

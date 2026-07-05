@@ -1,0 +1,83 @@
+# Real commercial laser specs for the paper's "Reading a datasheet" case
+# study. Every number below was read from the cited public source
+# (web-verified 2026-07-05); "not published" means the manufacturer's
+# datasheet genuinely omits the line — a finding in itself.
+# make_datasheet_table.py translates these into model units with
+# qsource.datasheet and compares them against paper/tables/budget.json.
+
+lambda_pump_nm: 775          # design wavelength for unit conversions
+
+classes:
+  fp:
+    label: "Free-running FP diode"
+    product: "L785P090"
+    manufacturer: "Thorlabs"
+    wavelength_nm: 785
+    source: "Thorlabs spec sheet 21159-S01 Rev.\\ E (2022)"
+    lines:
+      - name: "Center wavelength (unit-to-unit)"
+        printed: "775--795 nm"
+        kind: selection_window_nm
+        value: 20.0
+      - name: "Spectral width"
+        printed: "not published"
+        kind: not_published
+      - name: "Mode spacing / cavity length"
+        printed: "not published"
+        kind: not_published
+      - name: "$d\\lambda/dT$, RIN, SMSR"
+        printed: "not published"
+        kind: not_published
+    verdict_key: fp
+
+  dfb:
+    label: "Stabilized DFB diode"
+    product: "EYP-DFB-0780"
+    manufacturer: "eagleyard Photonics"
+    wavelength_nm: 780.24
+    source: "eagleyard datasheet Rev.\\ 1.03 (2022)"
+    lines:
+      - name: "Linewidth (FWHM)"
+        printed: "typ.\\ 0.6, max.\\ 1 MHz"
+        kind: lorentzian_linewidth_mhz
+        value: 1.0
+      - name: "Temp.\\ coefficient $d\\lambda/dT$"
+        printed: "typ.\\ 0.06 nm/K"
+        kind: temp_coeff_nm_per_k
+        value: 0.06
+      - name: "Current coefficient $d\\lambda/dI$"
+        printed: "typ.\\ 0.003 nm/mA"
+        kind: current_coeff_nm_per_ma
+        value: 0.003
+      - name: "SMSR"
+        printed: "min.\\ 30 dB"
+        kind: smsr_db
+        value: 30.0
+      - name: "RIN"
+        printed: "not published"
+        kind: not_published
+    verdict_key: dfb
+
+  ml:
+    label: "ps mode-locked oscillator"
+    product: "Tsunami (ps)"
+    manufacturer: "Spectra-Physics"
+    wavelength_nm: 775
+    source: "Tsunami datasheet (MKS/Newport)"
+    lines:
+      - name: "Pulse width (sech$^2$)"
+        printed: "$<$2--100 ps"
+        kind: pulse_ps_sech2
+        value: 2.0
+      - name: "Repetition rate"
+        printed: "80 MHz"
+        kind: rep_rate_mhz
+        value: 80.0
+      - name: "Noise (10 Hz--2 MHz)"
+        printed: "$<$0.2\\% rms"
+        kind: intensity_noise_pct
+        value: 0.2
+      - name: "Center wavelength stability"
+        printed: "not published"
+        kind: not_published
+    verdict_key: ml
