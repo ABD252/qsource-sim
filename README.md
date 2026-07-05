@@ -70,6 +70,17 @@ tests/         # sanity tests encoding known physics
 notebooks/     # runnable demos / experiments
 ```
 
+## الوثائق العربية (Arabic documentation)
+
+- **[الترجمة العربية الكاملة للورقة](paper/paper_ar.md)** — النسخة العربية
+  الكاملة بكل المعادلات والأشكال والجداول (مجمَّعة من `paper/arabic/`).
+- **[الدليل الشامل](docs/guide_ar.md)** — شرح كل شيء بالعربية: الفيزياء من
+  الصفر، قنوات الضرر الثلاث، الميزانية صفًا صفًا، قصص الليزرات الثلاثة،
+  استخدام البرنامج، خريطة الكود، وأسئلة المشرف المتوقعة بأجوبتها.
+- **[مسرد المصطلحات](docs/glossary_ar.md)** — ~80 مصطلحًا
+  (إنجليزي ⇄ عربي + شرح مبسط) هي المرجع المعياري لكل الوثائق العربية.
+- [ملخص النقاش](paper/summary_ar.md) — الملخص المختصر لمناقشة النتائج.
+
 ## The paper
 
 `paper/` holds the arXiv preprint (REVTeX 4-2) and its fully reproducible
