@@ -28,32 +28,50 @@ are now a standard requirement in single-photon-source design
 that the pump spectrum itself -- not only its nominal bandwidth -- can
 limit the purity a real source achieves \cite{zielnicki2018}.
 
-In nearly all of this work, however, the pump laser is idealized as a
-noiseless, transform-limited, single-longitudinal-mode Gaussian. Real
-pump lasers deviate from this ideal in ways that are already
-quantified, at no experimental cost, on the manufacturer's datasheet:
-center-frequency drift and jitter, relative intensity noise (RIN), and
-the longitudinal-mode structure of the laser cavity. What has been
-missing is a translation between those datasheet lines and the figure
-of merit a source builder cares about. How many gigahertz of pump
-jitter cost one percent of heralded purity? Does RIN matter at all?
+In much of this work the pump laser is idealized as a noiseless,
+transform-limited, single-longitudinal-mode Gaussian, although the
+idealization is not universal. Experiments with a multimode cw diode
+pump have shown that the pump's coherence structure transfers to the
+biphoton \cite{kwon2009}, and theory has traced how pump chirp maps
+onto the chirp and purity of the heralded single photon
+\cite{sanchezlozano2012}; the analogous transfer of partial pump
+coherence in the spatial (rather than spectral) domain has likewise
+been analyzed for the two-photon field \cite{jha2010}. These studies
+establish pump coherence as a phenomenon that propagates into the
+biphoton. What has been missing is the engineering translation: a
+mapping from the specifications printed on a commercial laser
+datasheet -- center-frequency drift and jitter, relative intensity
+noise (RIN), and the longitudinal-mode structure of the laser cavity
+-- to a quantitative purity budget with stated uncertainties. How
+many gigahertz of pump jitter cost one percent of heralded purity?
+Does RIN matter at all?
 
 This paper provides that translation for a concrete, numerically
 transparent model. We study a collinear SPDC source described by
 first-order group-velocity-mismatch (GVM) phase matching, with
 parameters representative of a 10 mm PPKTP crystal pumped at 775 nm and
 emitting at 1550 nm, with a transform-limited Gaussian pump of 0.164
-THz bandwidth (standard deviation); the ideal heralded purity of this
+THz bandwidth (standard deviation of the amplitude envelope); the
+ideal heralded purity of this
 reference design is $P = 0.810$. Each
 pump imperfection is mapped to a Monte-Carlo ensemble of pure pump
 realizations, and the heralded photon is described by the
 ensemble-averaged density matrix, from which we compute the mixed-state
-purity directly. The results form a compact imperfection budget
-(Table~\ref{tab:budget}). Center jitter of 26, 61, and 88 GHz rms
-consumes a 1\%, 5\%, and 10\% relative purity budget, respectively;
-re-matching the pump to a 5 mm crystal roughly doubles these
-tolerances, at the cost of pair rate, which we do not model. Even a
-single additional longitudinal mode of equal power at 0.25 THz spacing
+purity directly. The Monte-Carlo machinery is validated externally
+against an exact closed-form purity for Gaussian phase matching, with
+which it agrees within error bars (Fig.~\ref{fig:validation}). The
+results form a compact imperfection budget
+(Table~\ref{tab:budget}). Center jitter of $27.7 \pm 0.3$,
+$62.7 \pm 0.7$, and $91 \pm 1$ GHz rms (mean $\pm$ SEM over 16
+Monte-Carlo seeds) consumes a 1\%, 5\%, and 10\% relative purity
+budget, respectively; the 1\% figure is about one sixth of the 0.164
+THz (164 GHz) pump bandwidth. The budgets scale as $1/L$
+(Fig.~\ref{fig:scaling}): re-matching the pump to a 5 mm crystal
+doubles them, at the cost of pair rate, which we do not model, while
+a 20 mm crystal halves them. Even a
+single additional mutually incoherent longitudinal mode of equal power
+at 0.25 THz spacing (the incoherent-mode picture describes a
+free-running multimode diode, not a phase-coherent mode-locked comb)
 costs 17\% of the purity -- more than the entire 10\% budget; the cost
 scales with the side mode's relative power, so a weak, well-suppressed
 side mode is far less damaging. RIN, by contrast,
@@ -70,7 +88,10 @@ as the figures of merit; absolute pair rate, heralding efficiency, and
 higher-order dispersion lie outside the model. Section~\ref{sec:model} defines the JSA, the
 Schmidt-decomposition purity, and the mixed-state ensemble method.
 Section~\ref{sec:results} establishes the ideal design baseline
-(pump-bandwidth and crystal-length optima) and presents the
-imperfection sweeps behind the budget. Section~\ref{sec:discussion}
-summarizes the budget, develops the spectral-versus-statistical reading
-of a laser datasheet, and discusses limitations and extensions.
+(pump-bandwidth and crystal-length optima), validates the Monte-Carlo
+machinery against the closed form, and presents the imperfection
+sweeps behind the budget, including the $1/L$ scaling of the jitter
+tolerances. Section~\ref{sec:discussion} summarizes the budget,
+develops the spectral-versus-statistical reading of a laser datasheet,
+applies the translation to three commercial laser classes
+(Table~\ref{tab:datasheet}), and discusses limitations and extensions.

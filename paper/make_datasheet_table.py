@@ -31,6 +31,12 @@ from qsource.datasheet import (delta_lambda_to_delta_nu, fwhm_to_sigma,
 SECH2_TBP = 0.315   # time-bandwidth product (FWHM x FWHM) of sech^2 pulses
 
 
+def tex_sci(x: float) -> str:
+    """0.00002 -> '2\\times10^{-5}' (proper LaTeX, not printf 2e-05)."""
+    mant, exp = f"{x:.0e}".split("e")
+    return rf"{int(float(mant))}\times10^{{{int(exp)}}}"
+
+
 def _load_yaml():
     with open(os.path.join(HERE, "datasheets.yaml"), encoding="utf-8") as f:
         return yaml.safe_load(f)
@@ -87,7 +93,8 @@ def main() -> None:
                 derived["linewidth_bound_ghz"] = bound
                 block.append((line["name"], line["printed"],
                               f"$\\leq${bound * 1e3:.1f} MHz bound",
-                              f"${bound / j1:.0e}\\times$ the 1\\% budget"))
+                              f"${tex_sci(bound / j1)}\\times$ the "
+                              "1\\% budget"))
             elif kind == "temp_coeff_nm_per_k":
                 ghz_per_k = line["value"] * ghz_per_nm
                 # allowed peak-to-peak temperature excursion at the 1% budget
@@ -107,7 +114,7 @@ def main() -> None:
             elif kind == "smsr_db":
                 w = 10.0 ** (-line["value"] / 10.0)
                 block.append((line["name"], line["printed"],
-                              f"side-line weight {w:.0e}",
+                              f"side-line weight ${tex_sci(w)}$",
                               "negligible admixture"))
             elif kind == "pulse_ps_sech2":
                 dv_fwhm = SECH2_TBP / (line["value"] * 1e-12)
@@ -128,7 +135,7 @@ def main() -> None:
                 boost = 1.0 + r ** 2
                 block.append((line["name"], line["printed"],
                               f"$r = {r * 100:.1f}\\%$",
-                              f"boost $-1 = {boost - 1:.0e}$"))
+                              f"boost $-1 = {tex_sci(boost - 1)}$"))
         rows.append((cls, block))
         verdicts[key] = derived
 

@@ -37,7 +37,7 @@ For the double-Gaussian JSA (Gaussian pump x Gaussian phase matching):
   matches P(J) to < 1e-3 (test); full MC matches within 0.05 including
   the finite-K bias E[P_MC] = P + (P0-P)/K (test).
 - Budgets from the closed form vs the MC sweep (jitter_gauss):
-  predicted 29.9 / 68.9 / 101.7 GHz -> measured 30 +- 0.3 / 68.5 +- 0.8
+  predicted 29.9 / 69.0 / 101.7 GHz -> measured 30 +- 0.3 / 68.5 +- 0.8
   / 102 +- 1 GHz. EXACT agreement within error bars.
 - The sinc model's NORMALIZED decay P(J)/P(0) tracks the analytic shape
   g(J) with max deviation 0.041 over the dense sweep (fig6b).
@@ -69,7 +69,8 @@ L -> L/2, sigma -> 2 sigma.
   quoting criteria hold for every quoted cell (all seeds cross; CI clear
   of zero; drop resolved at 2 sigma).
 - 1/L LAW (fig7): 5% budgets 31.3 / 62.7 / 125 GHz at L = 20/10/5 mm =
-  ratios 1 : 2.00 : 3.99 — linear fit through the origin to within SEM.
+  ratios 1 : 2.00 : 4.00 (from the unrounded means) — linear fit
+  through the origin to within SEM.
   Same for 1% and 10% columns.
 - K-convergence (kconv.json): |b(K240) - b(K120)| < 2 SEM at every drop
   level -> K = 120 accepted; budgets are not moved by finite-K bias.
@@ -82,13 +83,18 @@ L -> L/2, sigma -> 2 sigma.
   log grid; reference point 0.164 THz -> 0.8100 (n = 256, 4 THz window).
   Near log-symmetric fall-off around the peak.
 - Length matching at 0.164 THz: optimum 10-12 mm; P = 0.286 at 2 mm.
-- Narrowband anchor: 5 GHz pump -> P = 0.043, K = 23.5 (CW limit).
-- Modes ladder (0.25 THz spacing): 0.810, 0.670, 0.535, 0.451, 0.370,
-  0.321, 0.297 for 1..7 lines — a single extra EQUAL-POWER mode costs
+- Narrowband anchor: 5 GHz pump -> P = 0.044, K = 22.6 (CW limit) on
+  grids that resolve the ~5 GHz pump ridge (0.0443/22.59 on the 4 THz
+  reference window at n >= 2048; the n = 512, 2 THz test grid with its
+  7.8 GHz pixel gives 0.0425/23.51).
+- Modes ladder (0.25 THz spacing): 0.810, 0.671, 0.543, 0.445, 0.377,
+  0.330, 0.292 for 1..7 lines — a single extra EQUAL-POWER mode costs
   17%, more than the whole 10% budget.
 - RIN: purity exactly invariant (< 1e-9); boost follows 1 + r^2
-  (1.0221 measured vs 1.0225 theory at 15%; 1.0865 at 30%, slightly
-  below 1.09 from the w >= 0 clipping).
+  (1.0221 measured vs 1.0225 theory at 15%; 1.0940 at 30% vs 1.09).
+  The w >= 0 clipping shifts the expected boost by only ~1e-4 even at
+  30% (exact clipped value 1.0899); the +-0.004 residual scatter about
+  1 + r^2 is finite-sample noise of the K = 1e3, 8-seed estimator.
 
 ## Regime of validity (quasi-static ensemble)
 
@@ -110,8 +116,8 @@ L -> L/2, sigma -> 2 sigma.
 With mean pair number mu per pulse: true heralds ~ mu, accidentals ~
 mu^2, CAR ~ 1/mu. RIN multiplies the mu^2 term by the boost:
 CAR -> CAR / boost, equivalent to running at mu_eff = mu x boost.
-Example mu = 0.05: 30% RIN (boost 1.0865) costs 8.0% of CAR
-(mu_eff = 0.0543); at the +1% budget (9.9% RIN) the cost is 1%.
+Example mu = 0.05: 30% RIN (boost 1.0940) costs 8.6% of CAR
+(mu_eff = 0.0547); at the +1% budget (9.9% RIN) the cost is 1%.
 
 ## Common-mode drift (shared pump) — EXACT model statement
 

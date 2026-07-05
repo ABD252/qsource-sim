@@ -78,10 +78,11 @@ reference point $P = 0.8100$ ($K = 1.2345$).
 
 An imperfect pump is a classical ensemble of pure pump realizations,
 so the heralded signal photon is described by a density matrix rather
-than a single Schmidt spectrum. We Monte-Carlo sample $N = 120$ pure
-realizations ($N = 1000$ for the RIN sweep, whose per-realization cost
-is lower), compute the discretized JSA matrix $A_k$ for each, and
-accumulate
+than a single Schmidt spectrum. We Monte-Carlo sample $N$ pure
+realizations per sweep point ($N = 120$ in the standard sweeps,
+$N = 240$ in the fine-resolution jitter study, and $N = 1000$ in the
+RIN sweep, whose per-realization cost is lower), compute the
+discretized JSA matrix $A_k$ for each, and accumulate
 \begin{equation}
   \rho \propto \sum_{k} w_k\, A_k A_k^\dagger ,
   \label{eq:rho}
@@ -96,22 +97,170 @@ Each imperfection is parameterized directly by laser datasheet
 statistics and enters only the pump. Per realization we sample:
 (i) \emph{center jitter/drift} --- a Gaussian shift of the pump center
 frequency with the quoted rms value, treated as a quasi-static
-shot-to-shot ensemble; (ii) \emph{longitudinal multimode structure} ---
+shot-to-shot ensemble.
+
+This quasi-static treatment has a definite regime of validity. The
+pump is \emph{pulsed}: $\sigma/2\pi = 0.164$~THz corresponds to
+picosecond-class pulses, and RIN in this model is pulse-energy noise.
+The ensemble picture holds for noise processes slower than the pump
+coherence time, $\tau_{\mathrm{coh}} \sim 1/\sigma \approx 1$~ps, so
+that each pair sees a static pump center, and faster than the
+integration time, so that the ensemble is fully sampled. For an
+80~MHz-class source integrated over seconds this window spans noise
+frequencies from $\sim$Hz to tens of GHz and covers the dominant
+laboratory processes --- thermal drift, acoustic and mount vibrations,
+and drive-current noise. Sub-picosecond noise components instead act
+coherently on each pure JSA and lie outside the model.
+
+(ii) \emph{Longitudinal multimode structure} ---
 one comb line drawn from a set of $M$ discrete lines centered
 symmetrically on the pump, at offsets $(m - (M-1)/2)$ times the mode
 spacing for $m = 0,\dots,M-1$ (half-integer multiples of the spacing
 when $M$ is even), with normalized line weights (uniform unless
 stated); the total pump shift is the sum of
-the comb-line offset and the jitter draw; and (iii) \emph{relative
+the comb-line offset and the jitter draw. Drawing a single line per
+realization asserts that the longitudinal modes are mutually
+\emph{incoherent} --- the correct description of a free-running
+multimode diode, whose modes carry random relative phases and exhibit
+mode-partition noise. It is not the correct description of a
+phase-coherent mode-locked comb: there the JSA is a coherent sum over
+the lines --- a pure state, not a mixture --- and the comb teeth,
+spaced by an 80~MHz-class repetition rate, are in any case far too
+fine to be resolved by the JSA.
+
+(iii) \emph{Relative
 intensity noise} (RIN) --- a realization weight
 $w = \max[0,\, 1 + \mathcal{N}(0, r^2)]$, where $\mathcal{N}(0, r^2)$
 is a zero-mean Gaussian with standard deviation $r$, the fractional rms
 intensity noise, each realization's JSA being individually normalized.
-The 10~mm jitter sweep, which has the largest Monte-Carlo variance, is
-run with three independent seeds (7, 8, 9) to estimate sampling
-uncertainty; the remaining Monte-Carlo sweeps use a single seed (7),
-and for the RIN sweep the heralded purity is exactly independent of
-the sampled weights (see the validation suite below).
+
+Every Monte-Carlo sweep behind the figures and the budgets of
+Table~\ref{tab:budget} is run with $S = 16$ independent seeds (the
+RIN sweep, whose heralded purity is exactly independent of the sampled
+weights --- see the validation suite below --- uses $S = 8$).
+Auxiliary convergence checks --- the single-seed grid-refinement
+replicas described below and the eight-seed $K$-doubling check of the
+jitter budgets --- use fewer seeds. Each
+(seed, point) pair draws its $N$ realizations from an independent
+random stream seeded by the pair itself; seeding streams by seed plus
+point index would instead make replicas overlap (seed $s+1$ at sweep
+point $i$ reproducing seed $s$ at point $i+1$) and thereby correlate
+nominally independent replicas. Reported curves are means over the $S$
+per-seed curves, and the imperfection budgets of
+Table~\ref{tab:budget} are quoted as the mean $\pm$ standard error of
+the mean (SEM) over the per-seed threshold crossings.
+
+\subsection{Closed-form benchmark: the double-Gaussian model}
+
+The Monte-Carlo machinery can be checked against mathematics rather
+than against itself. Replacing the sinc in Eq.~(\ref{eq:pm}) by a
+Gaussian phase-matching function \cite{grice1997,graffitti2018},
+\begin{equation}
+  \phi_G(\nu_s,\nu_i)
+  = \exp\!\left[-\gamma \left(\frac{\Delta k\, L}{2}\right)^{\!2}\right],
+  \qquad \gamma = 0.193,
+  \label{eq:phig}
+\end{equation}
+makes the JSA a two-dimensional Gaussian and every quantity of
+interest analytic. The value of $\gamma$ is fixed by matching the
+\emph{amplitude} half-maximum of the sinc: both functions equal $1/2$
+at $x = 1.8955$. Note that because the crystal amplitude is
+$\exp(-\gamma x^2)$, the curvature entering the quadratic form below
+is $2\gamma$. With $a_j = \kappa_j L/2$, the JSA is
+$f_G \propto \exp\{-\tfrac{1}{2}[A\nu_s^2 + 2C\nu_s\nu_i +
+B\nu_i^2]\}$ with
+\[
+  A = \frac{1}{\sigma^2} + 2\gamma a_s^2 , \qquad
+  B = \frac{1}{\sigma^2} + 2\gamma a_i^2 , \qquad
+  C = \frac{1}{\sigma^2} + 2\gamma a_s a_i ,
+\]
+and tracing out one photon gives the pure-state purity in closed form,
+\begin{equation}
+  P_0 = \sqrt{1 - \frac{C^2}{A B}} .
+  \label{eq:p0}
+\end{equation}
+For Gaussian center jitter of rms $J$ (ordinary Hz) the mixed purity
+of Eq.~(\ref{eq:purity}) also closes:
+\begin{equation}
+  P(J) = \frac{P_0}{\sqrt{1 + 4 c\,(2\pi J)^2}} ,
+  \qquad
+  c = \frac{1}{2\sigma^2 + 1/(\gamma a_s^2)} .
+  \label{eq:pj}
+\end{equation}
+Three points in the derivation are easy to get wrong. First, the
+cross term required for $\mathrm{Tr}(\rho^2)$ is
+$\mathrm{Tr}(A A^\dagger A' A'^\dagger) = \| A^\dagger A' \|_F^2$,
+not the two-photon overlap $|\langle f | f' \rangle|^2$, which is the
+purity of the mixed \emph{two-photon} state --- a different quantity.
+Second, mixed reduced states are signal/idler \emph{asymmetric}: the
+constant $c$ carries the GVM constant of the \emph{traced-out} photon,
+and since our $\rho$ in Eq.~(\ref{eq:rho}) keeps the idler, $c$
+contains $a_s$. Third, a pump-center shift is an exact rigid
+translation of the JSA, so per-realization normalization is exact and
+the pair rate is independent of jitter in this model. At the reference
+point Eq.~(\ref{eq:p0}) gives $P_0 = 0.9818$ --- intrinsically more
+separable than the sinc model's $P = 0.8100$, whose side lobes carry
+entanglement --- and exact separability ($C = 0$, $P_0 = 1$) occurs at
+a 0.1997~THz pump bandwidth, possible because
+$\kappa_s \kappa_i < 0$. Section~\ref{sec:results} uses
+Eqs.~(\ref{eq:p0}) and (\ref{eq:pj}) as an external validation of the
+full Monte-Carlo pipeline (Fig.~\ref{fig:validation}).
+
+\subsection{From datasheet units to model parameters}
+
+Manufacturers publish spectral widths in MHz or nm, stabilities in pm
+or pm/K, RIN as a dB/Hz spectral density, and cavity geometry in mm
+--- none of which the model accepts directly. The translation layer is
+deliberately explicit; each conversion carries one stated physical
+assumption. A Gaussian intensity-spectrum FWHM
+$\Delta\nu_{\mathrm{FWHM}}$ maps to the model bandwidth (the standard
+deviation of the amplitude envelope) as
+\begin{equation}
+  \frac{\sigma}{2\pi} = \frac{\Delta\nu_{\mathrm{FWHM}}}{2\sqrt{\ln 2}} .
+  \label{eq:fwhm}
+\end{equation}
+Wavelength excursions convert at first order via
+\begin{equation}
+  \delta\nu = \frac{c\,\delta\lambda}{\lambda^2} ,
+  \label{eq:dlam}
+\end{equation}
+i.e.\ 499.1~GHz per nm at $\lambda = 775$~nm. A bounded drift
+specification (``$\pm a$ over $T$ hours'', or a pm/K coefficient times
+a temperature stability) defines a peak-to-peak excursion band
+$\mathrm{pp} = 2a$ rather than a Gaussian; taking the center uniformly
+distributed over the band gives
+\begin{equation}
+  \mathrm{rms} = \frac{\mathrm{pp}}{2\sqrt{3}} .
+  \label{eq:pp}
+\end{equation}
+A RIN spectral density, assumed white over the collection bandwidth
+$B$ (the inverse of the detection gate or pulse period), integrates to
+the fractional rms
+\begin{equation}
+  r = \left[ 10^{\mathrm{RIN}/10}\, B \right]^{1/2} ,
+  \label{eq:rinint}
+\end{equation}
+and a standing-wave laser cavity of length $L_{\mathrm{cav}}$ and
+refractive index $n$ has longitudinal-mode spacing
+\begin{equation}
+  \mathrm{FSR} = \frac{c}{2 n L_{\mathrm{cav}}} ,
+  \label{eq:fsr}
+\end{equation}
+which maps onto the comb spacing of the multimode model.
+
+One published number deserves a caveat rather than a conversion: a
+Lorentzian linewidth arises from fast phase diffusion and has no
+finite second moment, so no rms exists and the quasi-static ensemble
+does not describe it --- phase noise that decorrelates within a pulse
+does not rigidly displace the pump band. We therefore use the
+Lorentzian HWHM only as a deliberately conservative stand-in bound on
+the center jitter; for the MHz-class linewidths of DFB diodes this
+bound sits orders of magnitude below the GHz-scale budgets of
+Table~\ref{tab:budget} and is negligible. Slow frequency-drift
+specifications ($\pm$pm over hours, pm/K times a temperature
+stability) \emph{are} quasi-static and enter through
+Eqs.~(\ref{eq:dlam}) and (\ref{eq:pp}) instead. These conversions are
+applied to real products in Table~\ref{tab:datasheet}.
 
 \subsection{Numerical robustness and validation}
 
@@ -121,18 +270,22 @@ at the hardest points of the parameter sweeps (0.05~THz bandwidth over
 a 6~THz half-window; 2~mm crystal over an 8~THz half-window). The RIN
 sweep uses a coarser $n = 64$ grid: there every realization shares the
 identical JSA and only the scalar weights vary, so the reported purity
-invariance is exact at any grid size. At
-mid-curve jitter (0.25~THz rms) the three seeds give
-$P = 0.484/0.460/0.513$, a spread of about $\pm 0.03$, while grid
-refinement at the same point changes $P$ by only $\sim 2\times10^{-5}$:
-Monte-Carlo noise, not discretization, dominates the error budget. The
-code ships with a validation suite of nine physics tests, including
-exact collapse of the zero-imperfection ensemble to the pure-state SVD
-purity ($P = 0.8100$), exact RIN invariance of the heralded purity
-(difference below $10^{-9}$), reduction of a comb with zero side-line
-weight to the single-mode result, and monotonic degradation of purity
-with jitter.
+invariance is exact at any grid size. Single-seed replicas of the
+10~mm jitter sweep at $n = 128$ and $n = 192$ shift the mixed purity
+by only $\sim 2\times10^{-5}$, far below the seed-to-seed Monte-Carlo
+spread: sampling noise, not discretization, dominates the error
+budget. The code ships with a validation suite of fourteen physics
+tests, including exact collapse of the zero-imperfection ensemble to
+the pure-state SVD purity ($P = 0.8100$), exact RIN invariance of the
+heralded purity (difference below $10^{-9}$), reduction of a comb with
+zero side-line weight to the single-mode result, monotonic degradation
+of purity with jitter, and closed-form benchmarks against the
+double-Gaussian model: the SVD purity matches Eq.~(\ref{eq:p0}) to
+better than $10^{-4}$, and the full Monte-Carlo pipeline reproduces
+Eq.~(\ref{eq:pj}) including its finite-$N$ estimator bias.
 
 All simulations use the open-source \texttt{qsource-sim} package
-(Python, MIT license); every figure and table in this paper regenerates
+(Python, MIT license), available at
+\url{https://github.com/ABD252/qsource-sim}; a Zenodo DOI will
+accompany submission. Every figure and table in this paper regenerates
 from a declarative YAML configuration file, one per study.

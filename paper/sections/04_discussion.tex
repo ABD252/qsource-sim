@@ -24,27 +24,121 @@ intensity-stable laser with a wandering center frequency delivers
 clean statistics on a mixed state.
 
 The budgets also show where a designer has leverage. Jitter tolerance
-scales approximately as $1/L$: halving the crystal from 10~mm to 5~mm
-(pump re-matched to 0.328~THz) roughly doubles every budget, from
-26/61/88~GHz~rms to 51/121/188~GHz~rms at the 1\%/5\%/10\% levels
-(Fig.~\ref{fig:jitter}), at the price of a lower pair rate that our
-model does not capture. The ideal purity itself is unchanged by this
-trade: the first-order JSA of Eq.~(\ref{eq:jsa}) is exactly invariant
-under the rescaling $L \to L/2$, $\sigma \to 2\sigma$, and the
+scales as $1/L$, a scaling we now demonstrate directly rather than
+infer: across crystals of 20, 10, and 5~mm (pump re-matched in each
+case) the 5\% budgets of $31.3 \pm 0.4$, $62.7 \pm 0.7$, and
+$125 \pm 1$~GHz~rms stand in the ratios $1:2.00:4.00$, and
+through-origin linear fits in $1/L$ describe all three drop levels
+within twice the seed error (Fig.~\ref{fig:scaling}; uncertainties
+throughout are mean $\pm$ SEM over 16 Monte-Carlo seeds, 8 seeds for
+the RIN sweep). Halving the
+crystal from 10~mm to 5~mm (pump re-matched to 0.328~THz) thus
+doubles every budget, from
+$27.7 \pm 0.3$/$62.7 \pm 0.7$/$91 \pm 1$~GHz~rms to
+$54.1 \pm 0.9$/$125 \pm 1$/$181 \pm 3$~GHz~rms at the 1\%/5\%/10\%
+levels (Fig.~\ref{fig:jitter}), at the price of a lower pair rate
+that our model does not capture. The ideal purity itself is unchanged by this
+trade: the first-order JSA of Eq.~(\ref{eq:jsa}) is invariant under
+the rescaling $L \to L/2$, $\sigma \to 2\sigma$ up to a common
+dilation of the frequency axes, which leaves the Schmidt
+spectrum---and hence the purity---exactly unchanged, and the
 slightly higher value quoted for the 5~mm sweep (0.818 versus 0.810)
 is a numerical windowing artifact---the fixed frequency window
 truncates relatively more of the sinc side lobes of the twice-wider
 5~mm JSA---not a physical improvement. Bandwidth, by contrast, is the easy specification:
 the 1\% window spans 0.159--0.202~THz, a full width of roughly 26\% of
 the reference bandwidth, and the 10\% window spans 0.114--0.281~THz.
-Center stability is the hard one: the 1\% budget of 26~GHz~rms
-corresponds, via $\delta\lambda = \lambda^{2}\,\delta\nu/c$ at
-$\lambda = 775$~nm, to a wavelength stability of only about 52~pm
-($\approx 0.05$~nm). A pump may exceed its nominal bandwidth by tens
+Center stability is the hard one: the 1\% budget of
+$27.7 \pm 0.3$~GHz~rms corresponds, via Eq.~(\ref{eq:dlam}) at
+$\lambda = 775$~nm, to a wavelength stability of only 55.5~pm
+($\approx 0.06$~nm). A pump may exceed its nominal bandwidth by tens
 of percent with negligible cost---though narrowing below the nominal
 value is penalized sooner, because the reference bandwidth sits near
 the lower edge of the tolerance window---but its center must hold to
 a sub-0.1-nm tolerance.
+
+\subsection*{Reading a datasheet}
+
+The budgets above are stated in the model's units---GHz~rms of center
+jitter, THz of amplitude bandwidth, percent rms of intensity
+noise---whereas manufacturers print nanometer spectral widths,
+temperature and current coefficients, side-mode suppression ratios,
+and integrated noise percentages. The translation layer of
+Sec.~\ref{sec:model}, Eqs.~(\ref{eq:fwhm})--(\ref{eq:fsr}), closes
+this gap, and Table~\ref{tab:datasheet} applies it line by line to
+three real products, one from each class of pump laser a designer is
+likely to consider. As a worked anchor for the bandwidth line: the
+reference $\sigma/2\pi = 0.164$~THz corresponds, via
+Eq.~(\ref{eq:fwhm}), to an intensity FWHM of 0.273~THz, i.e.\ 0.55~nm
+at 775~nm by Eq.~(\ref{eq:dlam}).
+
+\begin{table*}
+\centering
+\input{tables/datasheet_map}
+\caption{Reading three real pump-laser datasheets against the
+imperfection budgets. Each printed specification (first two columns)
+is converted into the model's units (third column) with the
+translation layer of Sec.~\ref{sec:model},
+Eqs.~(\ref{eq:fwhm})--(\ref{eq:fsr}), and compared against the
+Monte-Carlo budgets of Table~\ref{tab:budget} (last column). Lines the
+manufacturers do not publish are marked as such---for the free-running
+diode the omissions are themselves the finding. Sources are the public
+datasheets cited in each block header.}
+\label{tab:datasheet}
+\end{table*}
+
+The free-running Fabry--Perot diode (Thorlabs L785P090) is the
+cautionary case: its datasheet publishes \emph{none} of the
+budget-relevant lines---no spectral width, no mode spacing, no
+temperature coefficient, no RIN, no side-mode suppression ratio. The
+printed 775--795~nm center wavelength is unit-to-unit selection, not
+drift. A Fabry--Perot diode is multimode by construction, and
+Sec.~\ref{sec:results} shows that a single additional equal-power
+mode already costs 17\% of the purity, more than the entire 10\%
+budget, so the class fails before any number is checked. The deeper
+lesson is the absence itself: such a laser cannot even be budgeted
+from its datasheet, and is unusable for this application without full
+external spectral characterization.
+
+The stabilized DFB diode (eagleyard EYP-DFB-0780) is the opposite
+extreme: every spectral-stability line it publishes passes with
+enormous margin. Its 1~MHz maximum linewidth enters the quasi-static
+model only as a 0.5~MHz bound, more than four orders of magnitude
+below the $27.7 \pm 0.3$~GHz budget (a factor of
+$\sim 2\times 10^{-5}$). Its temperature coefficient,
+$d\lambda/dT = 0.06$~nm/K, translates by Eq.~(\ref{eq:dlam}) to
+29.9~GHz/K, so the full 1\% jitter budget---read as a uniform drift
+via Eq.~(\ref{eq:pp})---equals holding the case temperature to
+$\pm 1.6$~K (and, through $d\lambda/dI = 0.003$~nm/mA, the drive
+current to $\pm 32$~mA), ordinary servo performance. Its side-mode
+suppression of at least 30~dB is a side-line weight of $10^{-3}$, a
+negligible admixture. Yet this spectrally exemplary laser is the
+wrong tool for the present purpose: a CW pump with MHz linewidth sits
+five orders of magnitude below the 0.159--0.202~THz bandwidth window,
+and the purity collapses toward the strongly anti-correlated quasi-CW
+regime---already $P = 0.04$ at the 5~GHz narrowband anchor of
+Sec.~\ref{sec:results}, and falling roughly in proportion to
+bandwidth below that. The DFB class
+is the wrong choice for pure heralded photons, though precisely the
+right one for CW-pumped entanglement sources, where center stability
+is what matters.
+
+The picosecond mode-locked oscillator (Spectra-Physics Tsunami) is
+the natural class, and its datasheet shows which line binds. At the
+short end of its pulse-width range, a 2~ps sech$^{2}$ pulse
+(time--bandwidth product 0.315) has an intensity-spectrum FWHM of
+0.158~THz, i.e.\ $\sigma/2\pi = 0.095$~THz via Eq.~(\ref{eq:fwhm})
+with the sech$^{2}$ spectrum treated as an effective Gaussian,
+below the bandwidth window: at the 10~mm reference crystal this alone
+gives $P = 0.66$. Bandwidth is the binding line---and a benign one,
+because the purity is recovered by re-matching the crystal to
+$L \approx 17$~mm rather than by modifying the laser. Every other
+line passes trivially: the specified 0.2\%~rms intensity noise gives
+a double-pair boost excess of only $4\times 10^{-6}$, and the 80~MHz
+repetition-rate comb has teeth far too finely spaced to be resolved
+by the JSA.
+
+\subsection*{Extensions and limitations}
 
 Our ideal purity of 0.810 is the familiar ceiling of sinc-shaped
 phase matching, set by the side lobes of the unapodized crystal.
@@ -54,8 +148,31 @@ toward a Gaussian and raise this ceiling well above
 \emph{relative} degradations from whatever ceiling the phase matching
 provides, and the Monte-Carlo ensemble method applies unchanged to
 engineered crystals: only the sinc factor in Eq.~(\ref{eq:jsa}) need
-be replaced. Repeating the sweeps for an apodized source is a direct
-extension.
+be replaced. This is now demonstrated rather than asserted: repeating
+the full jitter sweep with the amplitude-matched Gaussian phase
+matching of Eq.~(\ref{eq:phig}), whose ideal purity is 0.9818, yields
+relative budgets of $30 \pm 0.3$/$68.5 \pm 0.8$/$102 \pm 1$~GHz~rms
+(Table~\ref{tab:budget}), about 8\% \emph{larger} than the sinc
+values at the 1\% level (8--13\% across the three levels), and these
+are reproduced exactly, within one standard error, by the closed form
+of Eq.~(\ref{eq:pj}), which predicts 29.9/69.0/101.7~GHz
+(Fig.~\ref{fig:validation}). The sinc-model budgets quoted above are
+therefore mildly conservative for engineered crystals.
+
+The budgets also translate into two-photon interference, but the
+translation depends on the architecture. For two \emph{independent}
+identical heralded sources the Hong--Ou--Mandel visibility equals the
+single-source purity, $V_{\mathrm{HOM}} = P$
+\cite{hong1987,mosley2008}, so the jitter budgets above bound the
+interference of sources pumped by separate free-running lasers. If
+instead both sources are pumped by the \emph{same} laser, the drift
+is common-mode: in each trial the two JSAs are translated rigidly
+together by the same center shift, every realization retains the
+ideal single-source purity, and within this model the shared-drift
+HOM visibility stays at the ideal value $P_0$ \emph{exactly},
+independent of the jitter amplitude. The reported budgets are
+therefore conservative for single-laser multiplexed architectures, in
+which center jitter cancels in common mode.
 
 Several limitations bound the present results, each pointing to future
 work. The model uses first-order GVM only: $\Delta k$ is linearized,
@@ -64,35 +181,62 @@ phase-matching ridge is perfectly straight; curvature will matter for
 broadband pumps and long crystals. We compute heralded purity only;
 heralding efficiency and absolute pair rate are outside the model,
 though a complete source assessment must weigh all three
-jointly~\cite{meyerscott2020}. Jitter is treated as a quasi-static
-shot-to-shot ensemble without explicit slow/fast time structure. An
-incoherent pump linewidth, beyond the Gaussian coherent bandwidth, is
-not yet a separate mixed-state channel. Finally, the treatment is
-collinear and single-spatial-mode. We note that for two identical,
-independent heralded sources the Hong-Ou-Mandel visibility equals the
-single-source purity, $V_{\mathrm{HOM}} = P$
-\cite{hong1987,mosley2008}, so the budgets reported here translate
-directly into two-source interference visibility.
+jointly~\cite{meyerscott2020}. The quasi-static treatment of jitter
+is no longer an open caveat: its regime of validity is bounded
+explicitly in Sec.~\ref{sec:model}---noise slower than the
+$\sim$1~ps pump coherence time and faster than the integration
+time---and only sub-picosecond noise, which acts coherently within
+each pulse, falls outside it on the fast side; drift slower than the
+integration time is instead summarized deterministically through the
+bounded-excursion conversion of Eq.~(\ref{eq:pp}). An incoherent pump linewidth,
+beyond the Gaussian coherent bandwidth, is not yet a separate
+mixed-state channel, which is why the Lorentzian linewidth in
+Table~\ref{tab:datasheet} enters only as a quasi-static bound.
+Similarly, the comb model asserts mutually incoherent lines and
+therefore covers free-running multimode diodes only; a mode-locked
+pump comb is phase-coherent, so its JSA is a coherent sum---a pure
+state---and requires a coherent-sum treatment rather than the mixture
+of Eq.~(\ref{eq:rho}). Finally, the treatment is collinear and
+single-spatial-mode.
 
 \section{Conclusion}
 
 We have converted pump-laser datasheet specifications into a
 quantitative imperfection budget for the heralded spectral purity of
 an SPDC source, using a first-order GVM model with Monte-Carlo pump
-ensembles. The reference source (10~mm crystal, 0.164~THz pump) has
-ideal purity 0.810. Keeping the purity within 1\%/5\%/10\% of ideal
-requires center-frequency jitter below 26/61/88~GHz~rms; a 5~mm
-crystal roughly doubles these budgets to 51/121/188~GHz~rms at the
-cost of pair rate. Single-longitudinal-mode operation is mandatory: a second
-mode at 0.25~THz spacing alone costs 17\% of the purity, and the
-mode-spacing budgets for a three-line comb are 31/76/111~GHz. Pump
-bandwidth is forgiving, with a 1\% window of 0.159--0.202~THz.
-Intensity noise leaves the purity exactly invariant but inflates the
-double-pair boost approximately as $1 + r^{2}$; the Monte-Carlo
-budgets place the $+1\%$ crossing at 10\% RIN and the $+5\%$ crossing
-near 22\%. The rule for choosing a pump is simple: spectral
-specifications damage purity, statistical specifications damage pair
-statistics, and both columns of the datasheet must be checked.
+ensembles, and we have validated the method against a closed-form
+double-Gaussian benchmark that reproduces the measured
+Gaussian-phase-matching budgets exactly:
+$30 \pm 0.3$/$68.5 \pm 0.8$/$102 \pm 1$~GHz measured versus
+29.9/69.0/101.7~GHz predicted. The reference source (10~mm crystal,
+0.164~THz pump) has ideal purity 0.810. Keeping the purity within
+1\%/5\%/10\% of ideal requires center-frequency jitter below
+$27.7 \pm 0.3$/$62.7 \pm 0.7$/$91 \pm 1$~GHz~rms (mean $\pm$ SEM
+over 16 Monte-Carlo seeds), equivalent at the 1\% level to holding
+the pump wavelength to 55.5~pm; the budgets obey a demonstrated $1/L$
+law over 5--20~mm crystals (ratios $1:2.00:4.00$), so a 5~mm crystal
+doubles them to $54.1 \pm 0.9$/$125 \pm 1$/$181 \pm 3$~GHz~rms at the
+cost of pair rate. Single-longitudinal-mode operation is mandatory: a
+second equal-power mode at 0.25~THz spacing alone costs 17\% of the
+purity, and the mode-spacing budgets for a three-line comb are
+$29.6 \pm 0.1$/$75.9 \pm 0.5$/$112.1 \pm 0.7$~GHz. Pump bandwidth is
+forgiving, with a 1\% window of 0.159--0.202~THz. Intensity noise
+leaves the purity exactly invariant but inflates the double-pair
+boost approximately as $1 + r^{2}$; the Monte-Carlo budgets place the
+$+1\%$ crossing at $9.93 \pm 0.08\%$ RIN and the $+5\%$ crossing at
+$22.3 \pm 0.2\%$. A translation layer maps these budgets onto real
+datasheets, and three case studies span the possible outcomes: a
+free-running Fabry--Perot diode publishes none of the budget-relevant
+lines and fails by construction; a stabilized DFB diode meets the
+drift budget by holding $\pm 1.6$~K yet collapses toward the
+strongly anti-correlated quasi-CW regime (already $P = 0.04$ at the
+5~GHz narrowband anchor) because its MHz linewidth lies five orders
+of magnitude below the bandwidth window; and a picosecond mode-locked
+oscillator passes every line except bandwidth, which is recovered by
+re-matching the crystal length rather than the laser. The rule for
+choosing a pump is simple: spectral specifications damage purity,
+statistical specifications damage pair statistics, and both columns
+of the datasheet must be checked.
 
 \begin{acknowledgments}
 We thank Prof.\ Yas Al-Hadithi (King Abdulaziz University) for his
