@@ -15,18 +15,20 @@ interference \cite{grice1997}. The Schmidt decomposition makes this
 quantitative: the heralded purity is the inverse of the Schmidt number
 of the JSA \cite{law2000}. Matching the group velocities of pump and
 down-converted fields can render the JSA approximately factorable at
-the source \cite{uren2005}, a strategy demonstrated experimentally with
-pure heralded photons produced without lossy spectral filtering
-\cite{mosley2008}.
+the source \cite{uren2005}, a strategy demonstrated experimentally with heralded
+photons of approximately 95\% purity produced without lossy spectral
+filtering \cite{mosley2008}.
 
 A mature source-engineering literature has since pushed intrinsic
 purity toward unity, most prominently by apodizing the nonlinear
 response through domain engineering of the crystal
 \cite{branczyk2011,graffitti2018}, and spectrally pure heralded sources
 are now a standard requirement in single-photon-source design
-\cite{meyerscott2020}. Joint-spectral characterization has also shown
-that the pump spectrum itself -- not only its nominal bandwidth -- can
-limit the purity a real source achieves \cite{zielnicki2018}.
+\cite{meyerscott2020}. Cross-comparisons of purity-characterization
+techniques on one and the same source have also shown that estimates
+based on the joint spectral intensity alone, blind to the joint
+spectral phase -- pump chirp in particular -- can substantially
+overestimate the purity a real source achieves \cite{zielnicki2018}.
 
 In much of this work the pump laser is idealized as a noiseless,
 transform-limited, single-longitudinal-mode Gaussian, although the
@@ -42,9 +44,28 @@ biphoton. What has been missing is the engineering translation: a
 mapping from the specifications printed on a commercial laser
 datasheet -- center-frequency drift and jitter, relative intensity
 noise (RIN), and the longitudinal-mode structure of the laser cavity
--- to a quantitative purity budget with stated uncertainties. How
-many gigahertz of pump jitter cost one percent of heralded purity?
-Does RIN matter at all?
+-- to a quantitative purity budget with stated uncertainties.
+Table~\ref{tab:compare} positions the present work against these
+studies and their context: each addresses a single imperfection
+channel or an adjacent design aspect, but none supplies the
+datasheet-level translation, an uncertainty-quantified budget, or
+an external closed-form check. How many gigahertz of pump jitter cost
+one percent of heralded purity? Does RIN matter at all?
+
+\begin{table*}[t]
+\centering
+\input{tables/comparison}
+\caption{Qualitative positioning relative to prior studies. Earlier
+work established that individual pump imperfections -- bandwidth,
+multimode structure, chirp, spatial coherence -- propagate into the
+biphoton, and adjacent studies treated multi-pair statistics and
+crystal-side apodization; this work adds the engineering layer
+those studies leave open: a translation from printed datasheet lines
+to model parameters, a purity budget with stated Monte-Carlo
+uncertainties, and an external closed-form validation of the
+numerical pipeline.}
+\label{tab:compare}
+\end{table*}
 
 This paper provides that translation for a concrete, numerically
 transparent model. We study a collinear SPDC source described by
@@ -59,39 +80,36 @@ realizations, and the heralded photon is described by the
 ensemble-averaged density matrix, from which we compute the mixed-state
 purity directly. The Monte-Carlo machinery is validated externally
 against an exact closed-form purity for Gaussian phase matching, with
-which it agrees within error bars (Fig.~\ref{fig:validation}). The
-results form a compact imperfection budget
-(Table~\ref{tab:budget}). Center jitter of $27.7 \pm 0.3$,
+which it agrees within error bars (Fig.~\ref{fig:validation}).
+The headline of the resulting imperfection budget
+(Table~\ref{tab:budget}) is that center jitter of $27.7 \pm 0.3$,
 $62.7 \pm 0.7$, and $91 \pm 1$ GHz rms (mean $\pm$ SEM over 16
 Monte-Carlo seeds) consumes a 1\%, 5\%, and 10\% relative purity
-budget, respectively; the 1\% figure is about one sixth of the 0.164
-THz (164 GHz) pump bandwidth. The budgets scale as $1/L$
-(Fig.~\ref{fig:scaling}): re-matching the pump to a 5 mm crystal
-doubles them, at the cost of pair rate, which we do not model, while
-a 20 mm crystal halves them. Even a
-single additional mutually incoherent longitudinal mode of equal power
-at 0.25 THz spacing (the incoherent-mode picture describes a
-free-running multimode diode, not a phase-coherent mode-locked comb)
-costs 17\% of the purity -- more than the entire 10\% budget; the cost
-scales with the side mode's relative power, so a weak, well-suppressed
-side mode is far less damaging. RIN, by contrast,
-leaves the heralded spectral purity exactly invariant in this model but
-inflates accidental double-pair emission by the factor $1 + r^2$ for
-fractional intensity noise $r$. Datasheet lines therefore map onto two
-distinct damage channels: spectral imperfections that degrade purity,
-and statistical imperfections that degrade pair statistics.
+budget, respectively -- the 1\% figure about one sixth of the 0.164
+THz (164 GHz) pump bandwidth. More broadly, datasheet lines map onto
+two distinct damage channels: spectral imperfections (jitter and
+longitudinal-mode structure) that degrade the heralded purity, and
+statistical imperfections (RIN) that leave the purity exactly
+invariant but degrade the pair statistics.
 
-We emphasize the scope: this is a numerical modeling study with
-first-order (linear) GVM phase matching, quasi-static ensemble noise,
-and heralded spectral purity (together with the relative double-pair boost)
-as the figures of merit; absolute pair rate, heralding efficiency, and
-higher-order dispersion lie outside the model. Section~\ref{sec:model} defines the JSA, the
-Schmidt-decomposition purity, and the mixed-state ensemble method.
-Section~\ref{sec:results} establishes the ideal design baseline
-(pump-bandwidth and crystal-length optima), validates the Monte-Carlo
-machinery against the closed form, and presents the imperfection
-sweeps behind the budget, including the $1/L$ scaling of the jitter
-tolerances. Section~\ref{sec:discussion} summarizes the budget,
-develops the spectral-versus-statistical reading of a laser datasheet,
-applies the translation to three commercial laser classes
-(Table~\ref{tab:datasheet}), and discusses limitations and extensions.
+The scope is that of a numerical modeling study: first-order (linear)
+GVM phase matching, quasi-static ensemble noise, and heralded spectral
+purity (together with the relative double-pair boost) as the figures
+of merit. Absolute pair rate, heralding efficiency, and higher-order
+dispersion lie outside the model.
+
+This paper makes four contributions.
+\begin{enumerate}
+\setlength{\itemsep}{0pt}
+\item The first quantitative pump-imperfection budget for heralded
+  spectral purity with stated Monte-Carlo uncertainties
+  (Table~\ref{tab:budget}, Sec.~\ref{sec:results}).
+\item An explicit datasheet-to-model translation layer, applied to
+  three real commercial lasers (Table~\ref{tab:datasheet},
+  Sec.~\ref{sec:discussion}).
+\item Closed-form external validation of the ensemble pipeline
+  against the exact double-Gaussian purity of Eqs.~(\ref{eq:p0})
+  and (\ref{eq:pj}) (Sec.~\ref{sec:model}; Fig.~\ref{fig:validation}).
+\item A demonstrated $1/L$ scaling law for the jitter tolerances
+  (Fig.~\ref{fig:scaling}).
+\end{enumerate}

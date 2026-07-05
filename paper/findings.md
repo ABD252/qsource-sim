@@ -70,7 +70,8 @@ L -> L/2, sigma -> 2 sigma.
   of zero; drop resolved at 2 sigma).
 - 1/L LAW (fig7): 5% budgets 31.3 / 62.7 / 125 GHz at L = 20/10/5 mm =
   ratios 1 : 2.00 : 4.00 (from the unrounded means) — linear fit
-  through the origin to within SEM.
+  through the origin to within twice the SEM (largest residual
+  1.8 SEM, at the 1% level for the 10 mm point).
   Same for 1% and 10% columns.
 - K-convergence (kconv.json): |b(K240) - b(K120)| < 2 SEM at every drop
   level -> K = 120 accepted; budgets are not moved by finite-K bias.
@@ -143,7 +144,7 @@ bound only (fast phase noise is NOT quasi-static).
   fails by construction (multimode) and cannot even be budgeted from
   its datasheet.
 - eagleyard EYP-DFB-0780 (DFB, 780.24 nm): linewidth max 1 MHz ->
-  quasi-static bound 0.5 MHz = 5e-5 of the 1% budget (negligible);
+  quasi-static bound 0.5 MHz = 2e-5 of the 1% budget (negligible);
   dlambda/dT = 0.06 nm/K -> 29.9 GHz/K -> 1% budget == holding
   +-1.6 K; dlambda/dI = 0.003 nm/mA -> 1.5 GHz/mA -> +-32 mA;
   SMSR >= 30 dB -> side weight 1e-3, negligible; RIN not published.

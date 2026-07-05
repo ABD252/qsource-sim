@@ -60,7 +60,7 @@ with increasing rms amplitude, for three length-matched sources. At
 zero jitter each ensemble reproduces its ideal value exactly
 ($P(0) = 0.8100$ for the 10~mm reference), and the seed-mean
 degradation is monotonic across the sweep. The shaded bands are the
-$\pm 1\sigma$ spread over $S = 16$ independent seeds ($K = 120$
+$\pm 1\sigma$ spread over $S = 16$ independent seeds ($N = 120$
 realizations per seed and sweep point); this seed-to-seed scatter
 dominates the negligible discretization error ($\sim 2\times 10^{-5}$
 under grid refinement at fixed window). Quoting each budget as the
@@ -69,9 +69,9 @@ mean $\pm$ standard error of the per-seed threshold crossings, the
 $91 \pm 1$~GHz rms of center jitter for a 1/5/10\% relative purity
 drop (in wavelength terms, $27.7$~GHz at 775~nm is $55.5$~pm). The
 1\% cell comes from a dedicated fine sweep (5~GHz steps around the
-crossing, $K = 240$); a $K$-convergence check on the 10~mm sweep
-finds $|b(K{=}240) - b(K{=}120)| < 2\,\mathrm{SEM}$ at every drop
-level, so the budgets are unchanged within error bars when $K$
+crossing, $N = 240$); an $N$-convergence check on the 10~mm sweep
+finds $|b(N{=}240) - b(N{=}120)| < 2\,\mathrm{SEM}$ at every drop
+level, so the budgets are unchanged within error bars when $N$
 doubles. Re-matching the source with a 5~mm crystal and a
 $0.328$~THz pump (ideal $P = 0.8183$) roughly doubles every budget,
 to $54.1 \pm 0.9$, $125 \pm 1$, and $181 \pm 3$~GHz, while a 20~mm
@@ -149,7 +149,7 @@ law. Figure~\ref{fig:scaling} plots the jitter budgets against the
 inverse crystal length: the 5\% budgets of $31.3$, $62.7$, and
 $125$~GHz at $L = 20$, 10, and 5~mm stand in the ratios
 $1 : 2.00 : 4.00$, and through-origin linear fits describe all three
-drop levels within the seed-to-seed standard errors. This is a
+drop levels within twice the seed-to-seed standard errors. This is a
 demonstrated $1/L$ law, consistent with the $1/L$ scaling of the
 phase-matching bandwidth in Eq.~(\ref{eq:pm}), and it gives the
 designer a one-parameter handle: halving the crystal length doubles
@@ -211,8 +211,8 @@ theoretical $1.0225$, and $1.0940$ at 30\% against $1.09$
 $w = \max[0,\, 1 + \mathcal{N}(0, r^2)]$ at zero shifts the expected
 boost by only $\sim 10^{-4}$ even at 30\% RIN (exact clipped value
 $1.0899$), so the residual $\pm 0.004$ scatter about $1 + r^2$ is
-finite-sample noise of the $K = 10^3$, 8-seed estimator. Budgeted on the
-boost ($K = 10^3$ realizations per point, mean $\pm$ SEM over 8
+finite-sample noise of the $N = 10^3$, 8-seed estimator. Budgeted on the
+boost ($N = 10^3$ realizations per point, mean $\pm$ SEM over 8
 seeds), a $+1\%$ increase is reached at $9.93 \pm 0.08$\% RIN and
 $+5\%$ at $22.3 \pm 0.2$\%; $+10\%$ is not reached within the 30\%
 sweep. The practical cost is easiest to state through the
@@ -224,18 +224,14 @@ double-pair term by the boost, dividing the CAR by it---equivalent to
 running the source at $\mu_{\mathrm{eff}} = \mu \times
 \mathrm{boost}$. At $\mu = 0.05$, a 30\% RIN (boost $1.0940$) costs
 8.6\% of the CAR, equivalent to $\mu_{\mathrm{eff}} = 0.0547$; at the
-$+1\%$ budget (9.9\% RIN) the CAR cost is 1\%. A datasheet must
-therefore be read with this split in mind: jitter and mode structure
-are spectral imperfections that degrade purity, while RIN is a
-statistical imperfection that leaves purity untouched and instead
-degrades the pair-number statistics.
+$+1\%$ budget (9.9\% RIN) the CAR cost is 1\%.
 
 \begin{figure*}[t]
 \includegraphics[width=\linewidth]{fig5_rin}
 \caption{Relative intensity noise. (a) Heralded purity versus RIN
 (0--30\% rms): exactly invariant, flat at $0.809956$ on the $n = 64$
 grid. (b) Double-pair boost $\langle w^2 \rangle / \langle w \rangle^2$
-from the Monte-Carlo ensemble ($K = 10^3$ realizations per point)
+from the Monte-Carlo ensemble ($N = 10^3$ realizations per point)
 against the small-$r$ theory
 $1 + r^2$ (dashed); the dotted line marks the noiseless value of 1.}
 \label{fig:rin}

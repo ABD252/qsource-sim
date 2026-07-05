@@ -75,11 +75,13 @@ def main() -> None:
     for key, cls in data["classes"].items():
         block = []
         derived = {}
+        unpublished = []   # collapsed into ONE row per product (referee-3:
+                           # Table II was too long; the omissions ARE the
+                           # finding, one line states them all)
         for line in cls["lines"]:
             kind = line["kind"]
             if kind == "not_published":
-                block.append((line["name"], line["printed"],
-                              "---", "not published"))
+                unpublished.append(line["name"])
             elif kind == "selection_window_nm":
                 # unit-to-unit selection window, not drift: translate for
                 # scale only.
@@ -136,6 +138,9 @@ def main() -> None:
                 block.append((line["name"], line["printed"],
                               f"$r = {r * 100:.1f}\\%$",
                               f"boost $-1 = {tex_sci(boost - 1)}$"))
+        if unpublished:
+            block.append((", ".join(unpublished), "not published",
+                          "---", "---"))
         rows.append((cls, block))
         verdicts[key] = derived
 

@@ -2,26 +2,18 @@
 \label{sec:discussion}
 
 The central practical message of this study is that a pump-laser
-datasheet splits into two distinct damage channels. Spectral
-specifications---center-frequency stability and longitudinal-mode
-structure---act on the heralded state itself: each realization
-displaces or replicates the pump band across the phase-matching ridge
-of Eq.~(\ref{eq:pm}), the ensemble average of Eq.~(\ref{eq:rho}) mixes
-inequivalent Schmidt decompositions, and the purity of
-Eq.~(\ref{eq:purity}) falls. Statistical specifications---intensity
+datasheet splits into two distinct damage channels, quantified row by
+row in Table~\ref{tab:budget}. Spectral specifications---center-frequency
+stability and longitudinal-mode structure---mix inequivalent Schmidt
+decompositions in the ensemble average of Eq.~(\ref{eq:rho}) and
+degrade the heralded purity. Statistical specifications---intensity
 noise---rescale each realization without changing its spectral shape,
-so the heralded purity is mathematically invariant (constant to better
-than $10^{-9}$ in our validation tests, Sec.~\ref{sec:model}; see also
-the flat sweep of Sec.~\ref{sec:results}), while the
-pair-number statistics degrade: the double-pair boost
-$\langle w^2 \rangle / \langle w \rangle^2 \approx 1 + r^2$ (exact to
-leading order in $r$) inflates
-accidental coincidences and erodes heralding fidelity through exactly
-the multi-pair channel analyzed in Ref.~\cite{takeoka2015}. Selecting
-a pump therefore means checking both columns: a spectrally quiet laser
-with high RIN delivers pure but noisy heralds, while an
-intensity-stable laser with a wandering center frequency delivers
-clean statistics on a mixed state.
+leaving the purity invariant while the double-pair boost inflates
+accidental coincidences through the multi-pair channel analyzed in
+Ref.~\cite{takeoka2015}. Selecting a pump therefore means checking
+both columns: a spectrally quiet laser with high RIN delivers pure but
+noisy heralds, while an intensity-stable laser with a wandering center
+frequency delivers clean statistics on a mixed state.
 
 The budgets also show where a designer has leverage. Jitter tolerance
 scales as $1/L$, a scaling we now demonstrate directly rather than
@@ -138,6 +130,57 @@ a double-pair boost excess of only $4\times 10^{-6}$, and the 80~MHz
 repetition-rate comb has teeth far too finely spaced to be resolved
 by the JSA.
 
+\subsection*{Consistency with published measurements}
+
+The physical premises of the budgets are borne out by published
+experiments, beginning with the multimode channel. Kwon
+\emph{et al.}~\cite{kwon2009} pumped a 3~mm type-I BBO crystal with a
+cw multimode 405~nm diode laser ($\sim$24 longitudinal modes within a
+0.67~nm FWHM) and found that the pump coherence structure is
+completely transferred to the biphoton interference: the $N = 2$
+de Broglie (NOON) fringes show periodic wave-packet revivals at the
+pump mode-spacing period with $\sim$98\% visibility. Their
+signal--idler Hong--Ou--Mandel dip, by contrast, has visibility above
+98\% with no revival---pair-exchange interference is insensitive to
+the multimode structure. This is exactly the premise of our comb
+channel: the pump modes imprint on the two-photon state along the
+sum-frequency coordinate, where they leave signal--idler interference
+untouched but directly damage the quantity our budgets bound, the
+heralded single-photon purity probed by \emph{two-source}
+interference. Since Ref.~\cite{kwon2009} does not measure heralded
+purity, the comparison is premise-level rather than number-level.
+
+For the observable itself, the flagship measurement is that of Mosley
+\emph{et al.}~\cite{mosley2008}: two independent
+group-velocity-matched KDP sources, pumped by femtosecond pulses at
+415~nm and used without narrowband spectral filters, gave a four-fold
+Hong--Ou--Mandel visibility of $94.4 \pm 1.6\%$ between independently
+heralded photons---a raw value with no background subtraction,
+presented as a lower bound on the mean photon purity, at heralding
+efficiencies up to 44\%. This is precisely the quantity our budgets
+constrain, since $V_{\mathrm{HOM}} = P$ for independent identical
+sources. A singular-value decomposition of the measured joint
+spectral intensity, under an assumed flat phase, instead gives
+$\sim$98\%: even in a flagship source, real-world pump and phase
+imperfections cost several percent---exactly the 1--5\% scale that
+the budget rows of Table~\ref{tab:budget} translate into datasheet
+tolerances.
+
+Zielnicki \emph{et al.}~\cite{zielnicki2018} make the same point from
+the characterization side: for one and the same unfiltered BBO
+source, the inferred purity is technique-dependent, $0.88 \pm 0.02$
+(Fourier-transform JSI) and $0.87 \pm 0.03$ (dispersive-fiber JSI)
+against $0.66 \pm 0.02$ (from $g^{(2)}$) and $0.61 \pm 0.05$
+(two-source HOM). JSI-based methods are blind to the joint spectral
+phase---pump chirp in particular---and therefore overestimate the
+purity, which empirically motivates the stated scope of our model:
+a flat spectral phase throughout, with a chirp channel as a natural
+future extension~\cite{sanchezlozano2012}. We note honestly what
+these comparisons do not provide: none of these experiments publishes
+purity as a function of a datasheet specification---precisely the gap
+the budget tables fill---so the published record validates the
+premises and scales of the model, not the budget numbers themselves.
+
 \subsection*{Extensions and limitations}
 
 Our ideal purity of 0.810 is the familiar ceiling of sinc-shaped
@@ -204,39 +247,22 @@ single-spatial-mode.
 We have converted pump-laser datasheet specifications into a
 quantitative imperfection budget for the heralded spectral purity of
 an SPDC source, using a first-order GVM model with Monte-Carlo pump
-ensembles, and we have validated the method against a closed-form
-double-Gaussian benchmark that reproduces the measured
-Gaussian-phase-matching budgets exactly:
+ensembles validated against a closed-form double-Gaussian benchmark
+that reproduces the measured Gaussian-phase-matching budgets exactly:
 $30 \pm 0.3$/$68.5 \pm 0.8$/$102 \pm 1$~GHz measured versus
-29.9/69.0/101.7~GHz predicted. The reference source (10~mm crystal,
-0.164~THz pump) has ideal purity 0.810. Keeping the purity within
-1\%/5\%/10\% of ideal requires center-frequency jitter below
-$27.7 \pm 0.3$/$62.7 \pm 0.7$/$91 \pm 1$~GHz~rms (mean $\pm$ SEM
-over 16 Monte-Carlo seeds), equivalent at the 1\% level to holding
-the pump wavelength to 55.5~pm; the budgets obey a demonstrated $1/L$
-law over 5--20~mm crystals (ratios $1:2.00:4.00$), so a 5~mm crystal
-doubles them to $54.1 \pm 0.9$/$125 \pm 1$/$181 \pm 3$~GHz~rms at the
+29.9/69.0/101.7~GHz predicted. For the reference source (10~mm
+crystal, ideal purity 0.810), keeping the purity within 1\%/5\%/10\%
+of ideal requires center-frequency jitter below
+$27.7 \pm 0.3$/$62.7 \pm 0.7$/$91 \pm 1$~GHz~rms, and the budgets
+obey a demonstrated $1/L$ law over 5--20~mm crystals (ratios
+$1:2.00:4.00$), so halving the crystal doubles every budget at the
 cost of pair rate. Single-longitudinal-mode operation is mandatory: a
-second equal-power mode at 0.25~THz spacing alone costs 17\% of the
-purity, and the mode-spacing budgets for a three-line comb are
-$29.6 \pm 0.1$/$75.9 \pm 0.5$/$112.1 \pm 0.7$~GHz. Pump bandwidth is
-forgiving, with a 1\% window of 0.159--0.202~THz. Intensity noise
-leaves the purity exactly invariant but inflates the double-pair
-boost approximately as $1 + r^{2}$; the Monte-Carlo budgets place the
-$+1\%$ crossing at $9.93 \pm 0.08\%$ RIN and the $+5\%$ crossing at
-$22.3 \pm 0.2\%$. A translation layer maps these budgets onto real
-datasheets, and three case studies span the possible outcomes: a
-free-running Fabry--Perot diode publishes none of the budget-relevant
-lines and fails by construction; a stabilized DFB diode meets the
-drift budget by holding $\pm 1.6$~K yet collapses toward the
-strongly anti-correlated quasi-CW regime (already $P = 0.04$ at the
-5~GHz narrowband anchor) because its MHz linewidth lies five orders
-of magnitude below the bandwidth window; and a picosecond mode-locked
-oscillator passes every line except bandwidth, which is recovered by
-re-matching the crystal length rather than the laser. The rule for
-choosing a pump is simple: spectral specifications damage purity,
-statistical specifications damage pair statistics, and both columns
-of the datasheet must be checked.
+single additional equal-power mode already costs 17\% of the purity.
+Intensity noise, by contrast, leaves the purity exactly invariant and
+instead inflates the double-pair boost. The rule for choosing a pump
+is simple: spectral specifications damage purity, statistical
+specifications damage pair statistics, and both columns of the
+datasheet must be checked.
 
 \begin{acknowledgments}
 We thank Prof.\ Yas Al-Hadithi (King Abdulaziz University) for his
